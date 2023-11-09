@@ -2,6 +2,11 @@
 {% load static %}
 {% block content %}
     <h1>
-        Welcome to your profile {{user.user_name}}
+        Welcome to your profile 
+
+       <li>Name: {{user.user_name}}</li> 
+        <li>Email: {{user.email}}</li>
+        <li>User Type: {{user.user_type}}</li>
+
     </h1>
 {% endblock content %}

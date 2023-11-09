@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser
+from .models import NewUser, Council, Location, Service, Notification, Transaction, Issue, Business
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -24,3 +24,10 @@ class UserAdminConfig(UserAdmin):
 
 
 admin.site.register(NewUser, UserAdminConfig)
+admin.site.register(Council)
+admin.site.register(Location)
+admin.site.register(Service)
+admin.site.register(Notification)
+admin.site.register(Transaction)
+admin.site.register(Issue)
+admin.site.register(Business)
