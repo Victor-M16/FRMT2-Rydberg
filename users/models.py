@@ -36,6 +36,15 @@ class CustomAccountManager(BaseUserManager):
 
 
 
+class Council(models.Model):
+
+    email = models.EmailField(_('email address'), unique=True)
+    name = models.CharField(max_length=150, unique=True)
+    councilID=models.AutoField(primary_key=True)
+
+    def __str__(self):
+        return self.name
+    
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
     USER_TYPE_CHOICES = (
@@ -61,35 +70,6 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         return self.user_name
     
 
-class Council(models.Model):
-    """
-    Represents a council with email, name, and a unique identifier.
-
-    Attributes:
-        email (str): The email address of the council.
-        name (str): The name of the council.
-        councilID (int): The unique identifier for the council.
-
-    Meta:
-        verbose_name (str): A human-readable name for the model.
-        verbose_name_plural (str): A human-readable plural name for the model.
-
-    Methods:
-        __str__(): Returns a string representation of the council, which is its name.
-    """
-
-    email = models.EmailField(_('email address'), unique=True)
-    name = models.CharField(max_length=150, unique=True)
-    councilID=models.AutoField(primary_key=True)
-        
-    class Meta:
-        verbose_name = _("Council")
-        verbose_name_plural = _("Councils")
-
-    def __str__(self):
-        return self.name
-
-
 class Location(models.Model):
     council = models.ForeignKey(Council, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
@@ -99,7 +79,7 @@ class Location(models.Model):
 
 
 class Service(models.Model):
-    service_TYPE_CHOICES = (
+    SERVICE_TYPE_CHOICES = (
         ('Market Fee', 'Market Fee'),
         ('Business Tax', 'Business Tax'),
         ('Rent', 'Rent'),

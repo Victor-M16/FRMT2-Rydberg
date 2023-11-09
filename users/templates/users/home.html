@@ -62,7 +62,12 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav><!-- End Nav Menu -->
 
+        {% if user.is_authenticated %}
+        <a class="btn-getstarted" href="{% url "frmt-dashboard" %}" >{{user.user_type}} Dashboard</a>
+        {% else %}
         <a class="btn-getstarted" href="{% url "frmt-login" %}" >Log In</a>
+        {% endif %}
+        
 
     </div>
   </header><!-- End Header -->
