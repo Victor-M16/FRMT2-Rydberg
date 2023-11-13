@@ -6,4 +6,5 @@ urlpatterns = [
      path('register/', views.register, name='frmt-register'),
      path('profile/', views.profile, name = 'frmt-profile'),
      path('dashboard/', views.dashboard, name = 'frmt-dashboard'),
+     path('dashboard/parameters', views.parameters, name = 'frmt-parameters'),
 ]

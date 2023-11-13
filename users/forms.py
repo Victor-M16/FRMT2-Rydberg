@@ -10,7 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
     user_type = forms.ChoiceField(
         label='User Type',
         widget=forms.Select,
-        choices= NewUser.USER_TYPE_CHOICES,  # Assuming USER_TYPE_CHOICES is defined in your models.py
+        choices= NewUser.USER_TYPE_CHOICES, 
         required=True,
     )
 
@@ -22,7 +22,7 @@ class CustomUserChangeForm(UserChangeForm):
     user_type = forms.ChoiceField(
         label='User Type',
         widget=forms.Select,
-        choices=NewUser.USER_TYPE_CHOICES,  # Assuming USER_TYPE_CHOICES is defined in your models.py
+        choices=NewUser.USER_TYPE_CHOICES,  
         required=True,
     )
 

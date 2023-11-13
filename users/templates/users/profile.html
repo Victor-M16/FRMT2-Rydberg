@@ -1,12 +1,19 @@
 {% extends "users/base.html" %}
 {% load static %}
 {% block content %}
-    <h1>
-        Welcome to your profile 
-
-       <li>Name: {{user.user_name}}</li> 
-        <li>Email: {{user.email}}</li>
-        <li>User Type: {{user.user_type}}</li>
-
-    </h1>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">FRMT Profile</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Name: {{user.user_name}}</li>
+          <li class="list-group-item">Email: {{user.email}}</li>
+          <li class="list-group-item">User Type: {{user.user_type}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
 {% endblock content %}

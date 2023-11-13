@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import NewUser, Council, Location, Service, Notification, Transaction, Issue, Business
+from .models import NewUser, Council, Service, Notification, Transaction, Issue, Business
 
 
 def home(request):
@@ -25,10 +25,23 @@ def register(request):
 def profile(request):
     return render(request, 'users/profile.html')
 
+
 @login_required
 def dashboard(request):
-    return render(request, 'users/dashboard.html' )
+    current_user = request.user  # Get the currently logged-in user
+        
+    if current_user.user_type == "Business Owner":
+        return render(request, 'users/dashboards/businessOwner.html')
+    elif current_user.user_type == "Land Owner":
+        return render(request, 'users/dashboards/landOwner.html')
+    elif current_user.user_type == "Collector":
+        return render(request, 'users/dashboards/collector.html')
+    else:
+        return render(request, 'users/dashboards/councilOfficial.html')
 
+@login_required
+def parameters(request):
+    return render(request, 'users/councilOfficial/parameters.html')
 
 """
 @login_required

@@ -40,6 +40,7 @@ class Council(models.Model):
 
     email = models.EmailField(_('email address'), unique=True)
     name = models.CharField(max_length=150, unique=True)
+    location = models.CharField(max_length=150)
     councilID=models.AutoField(primary_key=True)
 
     def __str__(self):
@@ -49,8 +50,8 @@ class Council(models.Model):
 class NewUser(AbstractBaseUser, PermissionsMixin):
     USER_TYPE_CHOICES = (
         ('Collector', 'Collector'),
-        ('Council Official', 'Council Official'),
         ('Business Owner', 'Business Owner'),
+        ('Land Owner', 'Land Owner'),
     )
 
     email = models.EmailField(_('email address'), unique=True)
@@ -70,25 +71,20 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         return self.user_name
     
 
-class Location(models.Model):
-    council = models.ForeignKey(Council, on_delete=models.CASCADE)
-    name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.name
 
 
 class Service(models.Model):
-    SERVICE_TYPE_CHOICES = (
-        ('Market Fee', 'Market Fee'),
-        ('Business Tax', 'Business Tax'),
-        ('Rent', 'Rent'),
-    )
+    SERVICE_TYPE_CHOICES = [
+        ('Market Fee', 'market fee'),
+        ('Business Tax', 'business tax'),
+        ('City Rate', 'city rate'),
+        ('License Fee', 'license fee')
+    ]
 
     serviceID=models.AutoField(primary_key=True)
     council = models.ForeignKey(Council, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    type = models.CharField(max_length=150, null=True)
+    type = models.CharField(max_length=150, choices=SERVICE_TYPE_CHOICES, null=True)
     rate = models.DecimalField(max_digits=5, decimal_places=2)
     
     def __str__(self):
