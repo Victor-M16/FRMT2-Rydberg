@@ -1,0 +1,95 @@
+{% extends "users/base.html" %}
+{% block content %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+        <div class="container">
+          <table class="table table-hover">
+          <h3>Registered Users</h3>
+          <thead>
+            <tr>
+              <th scope="col">User Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">User Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users  %}
+            <tr>
+              <td>{{user.user_name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.user_type}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+        
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row mb-4">
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card">
+                <div class="card-body">
+                  <h5 class="card-title">Collectors</h5>
+                  <ul class="list-group list-group-flush">
+                    {% for user in users  %}
+                    {% if user.user_type == 'Collector' %}
+                    <li class="list-group-item">{{user.user_name}}</li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card">
+                  <div class="card-body">
+                    <h5 class="card-title">Revenue Creators</h5>
+                    <ul class="list-group list-group-flush">
+                      {% for user in users  %}
+                      {% if user.user_type == 'Revenue Creator' %}
+                      <li class="list-group-item">{{user.user_name}}</li>
+                      {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Council Officials</h5>
+                        <ul class="list-group list-group-flush">
+                        {% for user in users  %}
+                        {% if user.user_type == 'Council Official' %}
+                        <li class="list-group-item">{{user.user_name}}</li>
+                        {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+         </div>
+        </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock content %}

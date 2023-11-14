@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser, Council, Service, Notification, Transaction, Issue, Business
+from .models import NewUser, Revenue, Transaction,Collection_instance
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -21,11 +21,25 @@ class UserAdminConfig(UserAdmin):
          ),
     )
 
+    def formfield_for_choice_field(self, db_field, request, **kwargs):
+        if db_field.name == 'user_type':
+            kwargs['choices'] = (
+                ('Collector', 'collector'),
+                ('Revenue Creator', 'revenue creator'),
+                ('Council Official', 'council official'),
+                ('Admin', 'admin')
+            )
+        return super().formfield_for_choice_field(db_field, request, **kwargs)
+
+admin.site.site_header = 'FRTM Admin Dashboard'
+
+class UsersAdminArea(admin.AdminSite):
+    site_header = 'Users Admin Area'
+
+
+
 
 admin.site.register(NewUser, UserAdminConfig)
-admin.site.register(Council)
-admin.site.register(Service)
-admin.site.register(Notification)
+admin.site.register(Revenue)
 admin.site.register(Transaction)
-admin.site.register(Issue)
-admin.site.register(Business)
+admin.site.register(Collection_instance)
