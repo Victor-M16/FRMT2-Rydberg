@@ -3,7 +3,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import NewUser, Revenue, Transaction, Collection_instance
-from django.views.generic import ListView
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     context = {
@@ -14,11 +21,72 @@ def home(request):
     }
     return render(request, 'users/home.html', context )
 
-
-class Collection_instanceListView(ListView):
+class Collection_instanceListView(LoginRequiredMixin, ListView):
     model = Collection_instance
-    template_name = 'users/home.html'
-    content_object_name = 'collection_instances'
+    template_name = "users/councilOfficial/collection_instances.html"
+    context_object_name = "collection_instances"
+
+
+class Collection_instanceDetailView(LoginRequiredMixin, DetailView):
+    model = Collection_instance
+
+
+class Collection_instanceCreateView(LoginRequiredMixin, CreateView):
+    model = Collection_instance 
+    fields = ['name','jurisdiction','collector','collected_revenue', 'amount']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class Collection_instanceUpdateView(LoginRequiredMixin, UpdateView):
+    model = Collection_instance 
+    fields = ['name','jurisdiction','collector','collected_revenue', 'amount']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)   
+
+class Collection_instanceDeleteView(LoginRequiredMixin, DeleteView):
+    model = Collection_instance 
+    success_url = '/CI/'
+    
+
+class my_Collection_instanceListView(LoginRequiredMixin, ListView):
+    model = Collection_instance
+    template_name = "users/collector/collection_instances.html"
+    context_object_name = "my_collection_instances"
+
+    def get_queryset(self):
+        # Assuming current_user is the user making the request
+        current_user = self.request.user
+
+        # Filter the Collection_instance queryset based on the current user
+        queryset = Collection_instance.objects.filter(collector=current_user)
+
+        return queryset
+
+@login_required
+def displayCollectionInstances(request):
+    
+    current_user = request.user  # Get the currently logged-in user
+    
+    
+    context = {
+        'collection_instances': Collection_instance.objects.all(),
+        'my_collection_instances' : Collection_instance.objects.filter(collector=current_user)
+    }
+
+    if current_user.user_type == "Council Official":
+        return render(request, 'users/councilOfficial/collection_instances.html', context)
+    else:
+        return render(request, 'users/collector/collection_instances.html', context)
+    
+
+def faq(request):
+    return render(request, 'users/faq.html')  
+
 
 def register(request):
     if request.method == 'POST':
@@ -41,7 +109,7 @@ def profile(request):
         return render(request, 'users/profiles/revenueCreator.html')
     elif current_user.user_type == "Collector":
         return render(request, 'users/profiles/collector.html')
-    elif current_user.user_type == "council official":
+    elif current_user.user_type == "Council Official":
         return render(request, 'users/profiles/councilOfficial.html')
     else:
         return render(request, 'users/profiles/base.html')
@@ -72,7 +140,22 @@ def parameters(request):
 
 @login_required
 def displayUsers(request):
+
+
     context = {
-        'users': NewUser.objects.all()
+        'users': NewUser.objects.all(),
+        
     }
+
     return render(request, 'users/admin/users.html', context)
+
+@login_required
+def displayProperties(request):
+
+
+    context = {
+        'users': NewUser.objects.all(),
+        
+    }
+
+    return render(request, 'users/properties.html', context)

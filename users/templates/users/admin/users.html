@@ -1,95 +1,282 @@
-{% extends "users/base.html" %}
-{% block content %}
-<main id="main" class="main">
+{% extends "users/base.html" %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+    <title>Users</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-    <section class="section dashboard">
-      <div class="row">
-        <div class="container">
-          <table class="table table-hover">
-          <h3>Registered Users</h3>
-          <thead>
-            <tr>
-              <th scope="col">User Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">User Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for user in users  %}
-            <tr>
-              <td>{{user.user_name}}</td>
-              <td>{{user.email}}</td>
-              <td>{{user.user_type}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        </div>
-        
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row mb-4">
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card">
-                <div class="card-body">
-                  <h5 class="card-title">Collectors</h5>
-                  <ul class="list-group list-group-flush">
-                    {% for user in users  %}
-                    {% if user.user_type == 'Collector' %}
-                    <li class="list-group-item">{{user.user_name}}</li>
-                    {% endif %}
-                    {% endfor %}
-                  </ul>
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'assets/img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/quill/quill.snow.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/simple-datatables/style.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+    <!-- Fonts and Icons -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Nucleo Icons -->
+    <link href="{% static 'assets2/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="{% static 'assets2/css/soft-ui-dashboard.css?v=1.0.7' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is an easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA, and PECR. -->
+    <script
+      defer
+      data-site="YOUR_DOMAIN_HERE"
+      src="https://api.nepcha.com/js/nepcha-analytics.js"
+    ></script>
+
+    
+
+  </head>
+
+  <body>
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Users</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Users</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-grid gap-2 mt-3">
+                  <button class="btn btn-primary" type="button">
+                    Add Users
+                  </button>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card">
-                  <div class="card-body">
-                    <h5 class="card-title">Revenue Creators</h5>
-                    <ul class="list-group list-group-flush">
-                      {% for user in users  %}
-                      {% if user.user_type == 'Revenue Creator' %}
-                      <li class="list-group-item">{{user.user_name}}</li>
-                      {% endif %}
-                      {% endfor %}
-                    </ul>
-                  </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-grid gap-2 mt-3">
+                  <button class="btn btn-primary" type="button">
+                    Add Collectors
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
 
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Council Officials</h5>
-                        <ul class="list-group list-group-flush">
-                        {% for user in users  %}
-                        {% if user.user_type == 'Council Official' %}
-                        <li class="list-group-item">{{user.user_name}}</li>
-                        {% endif %}
-                        {% endfor %}
-                        </ul>
+
+          <!-- End Table -->
+          <div class="col-12">
+            <div class="card mb-4">
+              <table class="table table-hover">
+                <div class="card-header pb-0">
+                  <h3>Registered Users</h3>
+                </div>
+              
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User Type</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img
+                          src="{% static 'assets2/img/profile.webp' %}"
+                          class="img-fluid rounded-circle me-3"
+                          style="width: 50px; height: 50px;"
+                          alt="user1"
+                        />
+                      </div>
+                      <div
+                        class="d-flex flex-column justify-content-center"
+                      >
+                        <h6 class="mb-0 text-sm">{{user.user_name}}</h6>
+                        <p class="text-xs text-secondary mb-0">
+                          {{user.email}}
+                        </p>
+                      </div>
                     </div>
-                </div>
+                  </td>
+                  <td>{{user.user_type}}</td>
+                  <td class="align-middle text-center text-sm">
+                    {% if user.is_active %}
+                    <span class="badge bg-success">Online</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Offline</span>
+                    {% endif %}
+                                         
+                  </td>
+                  <td class="align-middle">
+                    <a
+                      href="javascript:;"
+                      class="text-secondary font-weight-bold text-xs"
+                      data-toggle="tooltip"
+                      data-original-title="Edit user"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              </table>
             </div>
+            
+          </div>
+          <!-- End Table -->
 
-         </div>
+
+          <!-- End Table -->
+          <div class="col-12">
+            <div class="card mb-4">
+              <table class="table table-hover">
+                <div class="card-header pb-0">
+                  <h3>Collectors</h3>
+                </div>
+              
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                {% if user.user_type == "Collector" %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                        <img
+                          src="{% static 'assets2/img/profile.webp' %}"
+                          class="img-fluid rounded-circle me-3"
+                          style="width: 50px; height: 50px;"
+                          alt="user1"
+                        />
+                      </div>
+                      <div
+                        class="d-flex flex-column justify-content-center"
+                      >
+                        <h6 class="mb-0 text-sm">{{user.user_name}}</h6>
+                        <p class="text-xs text-secondary mb-0">
+                          {{user.email}}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  
+                  <td class="align-middle text-center text-sm">
+                    {% if user.is_active %}
+                    <span class="badge bg-success">Online</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Offline</span>
+                    {% endif %}                 
+                  </td>
+                  <td>{{user.start_date}}</td>
+                  <td class="align-middle">
+                    <a
+                      href="javascript:;"
+                      class="text-secondary font-weight-bold text-xs"
+                      data-toggle="tooltip"
+                      data-original-title="Edit user"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+              </table>
+            </div>
+            
+          </div>
+          <!-- End Table -->
         </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main><!-- End #main -->
+      </section>
+    </main>
+    <!-- End #main -->
+  </body>
+</html>
 {% endblock content %}

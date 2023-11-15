@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 class CustomAccountManager(BaseUserManager):
 
@@ -71,7 +72,7 @@ class Revenue(models.Model):
     ]
 
     revenueID=models.AutoField(primary_key=True)
-    revenue_type = models.CharField(max_length=150, choices=REVENUE_TYPE_CHOICES, null=True)
+    revenue_type = models.CharField(max_length=150, choices=REVENUE_TYPE_CHOICES, unique=True)
     rate = models.DecimalField(max_digits=20, decimal_places=2)
     
     def __str__(self):
@@ -81,17 +82,21 @@ class Collection_instance(models.Model):
     
     name=models.CharField(max_length=150, null=True)
     jurisdiction = models.CharField(max_length=150)
-    collector = models.ForeignKey(NewUser, verbose_name=_("collector"), on_delete=models.CASCADE, null=True, blank=True)
-    collected_revenue = models.ForeignKey(Revenue, on_delete=models.CASCADE)
-
+    collector = models.ForeignKey(NewUser, verbose_name=_("Collector"), on_delete=models.CASCADE)
+    collected_revenue = models.ForeignKey(Revenue, on_delete=models.CASCADE, to_field='revenue_type')
+    amount = models.DecimalField(max_digits=20, decimal_places=2, null=True)
 
     def __str__(self):
         return self.name 
     
+    def get_absolute_url(self):
+        return reverse("frmt-CI-detail", kwargs={"pk": self.pk})
+    
+    
 @receiver(post_save, sender=Collection_instance)
 def update_collector(sender, instance, **kwargs):
     # Only set the collector field if the associated NewUser has user_type 'collector'
-    if instance.collector and instance.collector.user_type != 'collector':
+    if instance.collector and instance.collector.user_type != 'Collector':
         instance.collector = None  # Clear the collector field if the user_type is not 'collector'
         instance.save()
       
