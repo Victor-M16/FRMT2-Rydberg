@@ -26,4 +26,14 @@ urlpatterns = [
      path('CI/<int:pk>/delete/',Collection_instanceDeleteView.as_view(),name='frmt-CI-delete'),
      path('mCI/', my_Collection_instanceListView.as_view(), name='frmt-my-c-instances'),
      path('properties/', views.displayProperties, name = 'frmt-properties'),
+     #new added pages
+     path('newproperties/', views.properties, name='properties'),
+     path('users/', views.users, name='users'),
+     path('market/', views.market, name='market'),
+     path('collections/', views.collections, name='collections'),
+     path('myprofile/', views.usersProfile, name='profile'),
+     path('users/profile', views.collectorsProfile, name='collectorprofile'),
+     path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
+     path('instances/', views.collectorInstances, name='instances'),
+     path('myinfo/', views.collectorDashProfile, name='collector-info'),
 ]
