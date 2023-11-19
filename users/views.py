@@ -159,3 +159,31 @@ def displayProperties(request):
     }
 
     return render(request, 'users/properties.html', context)
+
+#New added pages
+def properties(request):
+    return render(request, 'newTemplates/properties.html', {})
+
+def users(request):
+    return render(request, 'newTemplates/users.html', {})
+
+def market(request):
+    return render(request, 'newTemplates/market.html', {})
+
+def collections(request):
+    return render(request, 'newTemplates/collections.html', {})
+
+def usersProfile(request):
+    return render(request, 'newTemplates/users-profile.html', {})
+
+def collectorsProfile(request):
+    return render(request, 'newTemplates/collectors-profile.html', {})
+
+def collectorDashboard(request):
+    return render(request, 'newTemplates/collector-dash.html', {})
+
+def collectorInstances(request):
+    return render(request, 'newTemplates/collector-Instances.html', {})
+
+def collectorDashProfile(request):
+    return render(request, 'newTemplates/collector-dash-profile.html', {})
