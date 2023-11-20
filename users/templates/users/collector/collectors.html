@@ -1,0 +1,178 @@
+{% extends "users/home.html" %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Users</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/faviconrs.png' %}" rel="icon" />
+    <link
+      href="{% static 'assets/img/apple-touch-iconrs.png' %}"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/quill/quill.snow.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/simple-datatables/style.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+    <!-- Fonts and Icons -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Nucleo Icons -->
+    <link href="{% static 'assets2/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
+
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="{% static 'assets2/css/soft-ui-dashboard.css?v=1.0.7' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is an easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA, and PECR. -->
+    <script
+      defer
+      data-site="YOUR_DOMAIN_HERE"
+      src="https://api.nepcha.com/js/nepcha-analytics.js"
+    ></script>
+  </head>
+  <body>
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Collectors</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'frmt-home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Users</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+      <!-- End Table -->
+      <div class="col-12">
+        <div class="card mb-4">
+          <table class="table table-hover">
+            <div class="card-header pb-0">
+              <h3>Collectors</h3>
+            </div>
+
+            <thead>
+              <tr>
+                <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                >
+                  Name
+                </th>
+                <th
+                  class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                >
+                  Status
+                </th>
+                <th
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                >
+                  Date Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %} {% if user.user_type == "Collector" %}
+              <tr>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div>
+                      <img
+                        src="{% static 'assets2/img/profile.webp' %}"
+                        class="img-fluid rounded-circle me-3"
+                        style="width: 50px; height: 50px"
+                        alt="user1"
+                      />
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{user.user_name}}</h6>
+                      <p class="text-xs text-secondary mb-0">{{user.email}}</p>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="align-middle text-center text-sm">
+                  {% if user.is_active %}
+                  <span class="badge bg-success">Online</span>
+                  {% else %}
+                  <span class="badge bg-secondary">Offline</span>
+                  {% endif %}
+                </td>
+                <td>{{user.start_date}}</td>
+              </tr>
+              {% endif %} {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- End Table -->
+    </main>
+  </body>
+</html>
+{% endblock content %}

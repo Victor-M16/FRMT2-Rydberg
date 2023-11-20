@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import NewUser, Revenue, Transaction, Collection_instance
+from .models import (
+    NewUser, 
+    Revenue, 
+    Transaction, 
+    Collection_instance,
+    Business)
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -147,6 +152,35 @@ def displayProperties(request):
 
     return render(request, 'users/properties.html', context)
 
+#New added pages
+def properties(request):
+    return render(request, 'newTemplates/properties.html', {})
+
+def users(request):
+    return render(request, 'newTemplates/users.html', {})
+
+def market(request):
+    return render(request, 'newTemplates/market.html', {})
+
+def collections(request):
+    return render(request, 'newTemplates/collections.html', {})
+
+def usersProfile(request):
+    return render(request, 'newTemplates/users-profile.html', {})
+
+def collectorsProfile(request):
+    return render(request, 'newTemplates/collectors-profile.html', {})
+
+def collectorDashboard(request):
+    return render(request, 'newTemplates/collector-dash.html', {})
+
+def collectorInstances(request):
+    return render(request, 'newTemplates/collector-Instances.html', {})
+
+def collectorDashProfile(request):
+    return render(request, 'newTemplates/collector-dash-profile.html', {})
+
+
 
 
 #####################################################################################################
@@ -195,6 +229,14 @@ class my_Collection_instanceListView(LoginRequiredMixin, ListView):
         queryset = Collection_instance.objects.filter(collector=current_user)
 
         return queryset
+
+
+
+
+
+
+
+
 #####################################################################################################
 
 class NewUserListView(LoginRequiredMixin, ListView):
@@ -221,3 +263,89 @@ class NewUserCreateView(LoginRequiredMixin, CreateView):
     model = NewUser 
     form_class = CustomUserCreationForm
 
+
+
+
+
+
+
+
+
+
+#####################################################################################################
+class BusinessListView(LoginRequiredMixin, ListView):
+    model = Business
+    template_name = "users/businesses/business_list.html"
+    context_object_name = "businesses"
+
+
+class BusinessDetailView(LoginRequiredMixin, DetailView):
+    model = Business
+    template_name = "users/businesses/business_detail.html"
+
+
+class BusinessCreateView(LoginRequiredMixin, CreateView):
+    model = Business 
+    fields = ['name','owner','description',]
+    template_name = "users/businesses/business_form.html"
+
+    #def form_valid(self, form):
+     #   form.instance.author = self.request.user
+      #  return super().form_valid(form)
+
+
+class BusinessUpdateView(LoginRequiredMixin, UpdateView):
+    model = Business 
+    fields = ['name','owner','description',]
+    template_name = "users/businesses/business_form.html"
+
+    #def form_valid(self, form):
+    #    form.instance.author = self.request.user
+    #    return super().form_valid(form)   
+
+class BusinessDeleteView(LoginRequiredMixin, DeleteView):
+    model = Business 
+    success_url = '/businesses/'
+    template_name = "users/businesses/business_confirm_delete.html"
+    
+
+
+
+
+
+
+#####################################################################################################
+class TransactionListView(LoginRequiredMixin, ListView):
+    model = Transaction
+    template_name = "users/transactions/transaction_list.html"
+    context_object_name = "transactions"
+
+
+class TransactionDetailView(LoginRequiredMixin, DetailView):
+    model = Transaction
+    template_name = "users/transactions/transaction_detail.html"
+
+
+class TransactionCreateView(LoginRequiredMixin, CreateView):
+    model = Transaction 
+    fields = ['name','owner','description',]
+    template_name = "users/transactions/transaction_form.html"
+
+    #def form_valid(self, form):
+     #   form.instance.author = self.request.user
+      #  return super().form_valid(form)
+
+
+class TransactionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Transaction 
+    fields = ['name','owner','description',]
+    template_name = "users/transactions/transaction_form.html"
+
+    #def form_valid(self, form):
+    #    form.instance.author = self.request.user
+    #    return super().form_valid(form)   
+
+class TransactionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Transaction 
+    success_url = '/transactions/'
+    template_name = "users/transactions/transaction_confirm_delete.html"

@@ -1,0 +1,72 @@
+{% extends "users/admin/users.html" %} 
+{% block trial %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Businesses</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
+          <li class="breadcrumb-item active">Businesses</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+        <div class="col-lg-12">
+
+            
+         <!-- Start Table -->
+         <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Businesses</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Owner</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for business in businesses  %}
+                      <tr>
+                        <td>{{business.name}}</td>
+                        <td>{{business.owner}}</td>
+                        <td class="align-middle">
+                          <a
+                            href="{% url 'frmt-business-detail' business.id %}"
+                            class="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="Edit user"
+                          >
+                            View
+                          </a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Table -->
+
+        
+        <div class="row">
+          <div class="col sm-4">
+            <a href="{% url 'frmt-business-create' %}">
+              <button class="btn btn-outline-success" type="submit"><i class="bi bi-person-add"></i> Create New </button>
+            </a>  
+          </div>  
+        </div> 
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock trial %}
