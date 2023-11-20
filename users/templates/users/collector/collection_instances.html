@@ -26,19 +26,30 @@
               <th scope="col">Collector</th>
               <th scope="col">Revenue Type</th>
               <th scope="col">Amount</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             {% for my_collection_instance in my_collection_instances  %}
-            <a href="{% url 'frmt-mCI-detail' %}">
+            
               <tr>
                 <td>{{my_collection_instance.name}}</td>
                 <td>{{my_collection_instance.jurisdiction}}</td>
                 <td>{{my_collection_instance.collector}}</td>
                 <td>{{my_collection_instance.collected_revenue}}</td>
                 <td>{{my_collection_instance.amount}}</td>
+                <td class="align-middle">
+                  <a
+                    href="#' collection_instance.id %}"
+                    class="text-secondary font-weight-bold text-xs"
+                    data-toggle="tooltip"
+                    data-original-title="Edit user"
+                  >
+                    View
+                  </a>
+                </td>
               </tr>
-            </a>
+            
             {% endfor %}
           </tbody>
         </table>

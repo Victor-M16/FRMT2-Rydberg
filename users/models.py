@@ -60,6 +60,9 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.user_name
     
+    def get_absolute_url(self):
+        return reverse("frmt-newuser-detail", kwargs={"pk": self.pk})
+    
 
 
 
