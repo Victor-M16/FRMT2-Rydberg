@@ -24,38 +24,18 @@
     rel="stylesheet"
   />
 
-  <!-- Vendor CSS Files -->
-  <link
-    href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/quill/quill.snow.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
-    rel="stylesheet"
-  />
-  <link
-    href="{% static 'assets/vendor/simple-datatables/style.css' %}"
-    rel="stylesheet"
-  />
+ <!-- Vendor CSS Files -->
+ <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+ <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+ <!-- Template Main CSS File -->
+ <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -96,9 +76,6 @@
     data-site="YOUR_DOMAIN_HERE"
     src="https://api.nepcha.com/js/nepcha-analytics.js"
   ></script>
-
- 
- 
 
 </head>
 
@@ -377,6 +354,13 @@
             <span>View Collection Instances</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
+            <i class="bi bi-house"></i>
+            <span>View Properties</span>
+          </a>
+        </li><!-- Revenue Type Creation Nav -->
   
         
 
@@ -582,15 +566,15 @@
   
   
   
-  
-  
-  
-  
 
   
   {% block content %}
   
   {% endblock content %}
+
+
+
+
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">

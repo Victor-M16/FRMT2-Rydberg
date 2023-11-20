@@ -29,13 +29,21 @@ from .views import (
     TransactionUpdateView,
 
 
+    PropertyCreateView,
+    PropertyDeleteView,
+    PropertyDetailView,
+    PropertyListView,
+    PropertyUpdateView,
+
+
     )
 
 
 
+
 urlpatterns = [
-    path('', views.landing, name='frmt-landing'),
-     path('home/', views.home, name='frmt-home'),
+   
+     path('', views.home, name='frmt-home'),
 
      #path('CI/', views.displayCollectionInstances, name='frmt-c-instances'),
      #path('register/', views.register, name='frmt-register'),
@@ -93,14 +101,11 @@ urlpatterns = [
 
 
      #url patterns for council official related properties interactions
-     path('properties/', views.displayProperties, name = 'frmt-properties'),
-
-     path('newproperties/', views.properties, name='properties'),
-     path('transactions/',TransactionListView.as_view(), name='frmt-transactions'),
-     path('transactions/new/', TransactionCreateView.as_view(), name='frmt-transaction-create'),
-     path('transactions/<int:pk>/', TransactionDetailView.as_view(), name='frmt-transaction-detail'),
-     path('transactions/<int:pk>/update/', TransactionUpdateView.as_view(), name='frmt-transaction-update'),
-     path('transactions/<int:pk>/delete/',TransactionDeleteView.as_view(),name='frmt-transaction-delete'),
+     path('properties/',PropertyListView.as_view(), name='frmt-properties'),
+     path('properties/new/', PropertyCreateView.as_view(), name='frmt-property-create'),
+     path('properties/<int:pk>/', PropertyDetailView.as_view(), name='frmt-property-detail'),
+     path('properties/<int:pk>/update/', PropertyUpdateView.as_view(), name='frmt-property-update'),
+     path('properties/<int:pk>/delete/',PropertyDeleteView.as_view(),name='frmt-property-delete'),
 
 
 
@@ -109,7 +114,10 @@ urlpatterns = [
      path('users/', views.users, name='users'),
      #collector's market collections
      path('market/', views.market, name='market'),
-     #collector types? collector instances...
+
+
+
+     #collector types? they are like revenue types.. for fahad but I will currently use with revenue types model
      path('collections/', views.collections, name='collections'),
 
 

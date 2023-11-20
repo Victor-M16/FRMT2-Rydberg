@@ -7,7 +7,9 @@ from .models import (
     Revenue, 
     Transaction, 
     Collection_instance,
-    Business)
+    Business,
+    Property,
+    )
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -150,7 +152,7 @@ def displayProperties(request):
         
     }
 
-    return render(request, 'users/properties.html', context)
+    return render(request, 'users/properties/properties.html', context)
 
 #New added pages
 def properties(request):
@@ -349,3 +351,43 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction 
     success_url = '/transactions/'
     template_name = "users/transactions/transaction_confirm_delete.html"
+
+
+
+
+
+#####################################################################################################
+class PropertyListView(LoginRequiredMixin, ListView):
+    model = Property
+    template_name = "users/properties/properties.html"
+    context_object_name = "properties"
+
+
+class PropertyDetailView(LoginRequiredMixin, DetailView):
+    model = Property
+    template_name = "users/properties/property_detail.html"
+
+
+class PropertyCreateView(LoginRequiredMixin, CreateView):
+    model = Property 
+    fields = ['name','plot_number','capital_value','land_use','rates_owed',]
+    template_name = "users/properties/property_form.html"
+
+    #def form_valid(self, form):
+     #   form.instance.author = self.request.user
+      #  return super().form_valid(form)
+
+
+class PropertyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Property 
+    fields = ['name','plot_number','capital_value','land_use','rates_owed',]
+    template_name = "users/properties/property_form.html"
+
+    #def form_valid(self, form):
+    #    form.instance.author = self.request.user
+    #    return super().form_valid(form)   
+
+class PropertyDeleteView(LoginRequiredMixin, DeleteView):
+    model = Property 
+    success_url = '/properties/'
+    template_name = "users/properties/property_confirm_delete.html"
