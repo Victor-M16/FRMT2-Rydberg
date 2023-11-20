@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser, Revenue, Transaction,Collection_instance
+from .models import NewUser, Revenue, Transaction,Collection_instance, Business
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -42,4 +42,5 @@ class UsersAdminArea(admin.AdminSite):
 admin.site.register(NewUser, UserAdminConfig)
 admin.site.register(Revenue)
 admin.site.register(Transaction)
+admin.site.register(Business)
 admin.site.register(Collection_instance)

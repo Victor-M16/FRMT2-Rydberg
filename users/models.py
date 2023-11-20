@@ -97,6 +97,8 @@ class Business(models.Model):
     def get_absolute_url(self):
         return reverse("frmt-business-detail", kwargs={"pk": self.pk})
 
+
+
 #collection instances implementation
 class Collection_instance(models.Model):
     
@@ -121,6 +123,8 @@ def update_collector(sender, instance, **kwargs):
         instance.save()
       
 
+
+
 #transaction models
 class Transaction(models.Model):
     STATUSES=(('P','Pending'),
@@ -128,11 +132,10 @@ class Transaction(models.Model):
               ('F','Failed') 
               )
     
-    transationID=models.BigAutoField(primary_key=True)
     payerID = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='payer_id')
     collectorID = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='collector_id')
     revenueID=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
-    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    amount = models.DecimalField(max_digits=20, decimal_places=2)
     receipt_info = models.CharField(max_length=150)
     date_time = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=150, choices=STATUSES)
@@ -142,5 +145,31 @@ class Transaction(models.Model):
     
     def get_absolute_url(self):
         return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})
+    
+
+
+#property models
+class Property(models.Model):
+    LAND_USE_TYPES=(('Domestic','Domestic'),
+              ('Commercial','Commercial'),
+              )
+
+    plot_number = models.CharField( max_length=50, unique=True)
+    land_use = models.CharField(max_length=20, choices=LAND_USE_TYPES)
+    capital_value = models.DecimalField(max_digits=30, decimal_places=2)
+    name = models.CharField(max_length=150)
+    rates_owed = models.DecimalField(max_digits=30, decimal_places=2, null= True)
+
+
+    class Meta:
+        verbose_name = _("Property")
+        verbose_name_plural = _("Properties")
+
+    def __str__(self):
+        return self.plot_number
+
+    def get_absolute_url(self):
+        return reverse("frmt-property-detail", kwargs={"pk": self.pk})
+
 
 

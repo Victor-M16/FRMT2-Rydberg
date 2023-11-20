@@ -1,5 +1,6 @@
-{% extends "users/home.html" %}
+{% extends "users/base_glow.html" %}
 {% load static %}
+
 {% block content %}
 
   <main id="main" class="main">
@@ -8,7 +9,7 @@
       <h1>Profile</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'frmt-home' %}">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Profile</li>
         </ol>

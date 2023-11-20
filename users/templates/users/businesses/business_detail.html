@@ -1,5 +1,5 @@
-{% extends "users/admin/users.html" %}    
-{% block trial %}
+{% extends "users/base_glow.html" %}    
+{% block content %}
 <main id="main" class="main">
   <section class="section dashboard">
     <div class="row">
@@ -10,6 +10,7 @@
               {{ object.name }}
           </div>
           <div class="card-body">
+            <p></p>
             <h5 class="card-subtitle mb-2 text-muted">Owner: {{ object.owner }}</h5>
             <p class="card-text">Description: {{object.description}}</p>
           </div>
@@ -23,17 +24,17 @@
       <div class="col">
         <div class="mb-1">
             <a class="btn btn-outline-success" href="{% url 'frmt-business-create' %}"style="width: 18rem;">
-                <i class="bi bi-person-add"></i> Create New
+                 Create New
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-outline-info" href="{% url 'frmt-business-update' object.id %}"style="width: 18rem;" >
-                <i class="bi bi-person-lines-fill"></i> Update
+                Update
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-outline-danger" href="{% url 'frmt-business-delete' object.id %}"style="width: 18rem;">
-                <i class="bi bi-person-dash-fill"></i>Delete
+                Delete
             </a>
         </div>
       <div class="col"></div><div class="col"></div>
@@ -43,4 +44,4 @@
 </section>
 
 </main>
-{% endblock trial %}  
+{% endblock content %}  

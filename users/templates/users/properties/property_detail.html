@@ -1,0 +1,49 @@
+{% extends "users/base_glow.html" %}    
+{% block content %}
+<main id="main" class="main">
+  <section class="section dashboard">
+    <div class="row">
+      
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+              {{ object.name }}
+          </div>
+          <div class="card-body">
+            <p></p>
+            <h5 class="card-subtitle mb-2 text-muted">Plot No: {{ object.plot_number }}</h5>
+            <p class="card-text">Capital Value: {{object.capital_value}}</p>
+            <p class="card-text">Property Type: {{object.land_use}}</p>
+            <p class="card-text">Rates Owed: {{object.rates_owed}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div><div class="col"></div>
+    </div>
+
+    <div class="row">
+      
+      <div class="col">
+        <div class="mb-1">
+            <a class="btn btn-outline-success" href="{% url 'frmt-property-create' %}"style="width: 18rem;">
+                Create New
+            </a>
+        </div>
+        <div class="mb-1">
+            <a class="btn btn-outline-info" href="{% url 'frmt-property-update' object.id %}"style="width: 18rem;" >
+                Update
+            </a>
+        </div>
+        <div class="mb-1">
+            <a class="btn btn-outline-danger" href="{% url 'frmt-property-delete' object.id %}"style="width: 18rem;">
+                Delete
+            </a>
+        </div>
+      <div class="col"></div><div class="col"></div>
+      </div>
+    </div>
+    
+</section>
+
+</main>
+{% endblock content %}  

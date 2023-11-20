@@ -39,14 +39,13 @@
                   <tbody>
                   {% for transaction in transactions  %}
                     <tr>
-                      <td>{{transaction.transactionID}}</td>
+                      <td>{{transaction.id}}</td>
                       <td>{{transaction.amount}}</td>
                       <td>{{transaction.receipt_info}}</td>
-                      <td>{{transaction.status}}</td>
                       <td class="align-middle text-center text-sm">
-                        {% if transaction.status == 'Completed' %}
+                        {% if transaction.status == 'C' %}
                         <span class="badge bg-success">Completed</span>
-                        {% elif transaction.status == 'Pending' %}
+                        {% elif transaction.status == 'P' %}
                         <span class="badge bg-secondary">Pending</span>
                         {% else %}
                         <span class="badge bg-danger">Failed</span>
