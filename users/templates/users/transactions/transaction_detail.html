@@ -1,0 +1,48 @@
+{% extends "users/base.html" %}    
+{% block content %}
+<main id="main" class="main">
+  <section class="section dashboard">
+    <div class="row">
+      
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+              {{ object.name }}
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{ object.jurisdiction }}</li>
+              <li class="list-group-item">{{ object.collector }}</li>
+              <li class="list-group-item">{{ object.collected_revenue }}</li>
+              <li class="list-group-item">{{ object.amount }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col"></div><div class="col"></div>
+    </div>
+
+    <div class="row">
+      
+      <div class="col">
+        <div class="mb-1">
+            <a class="btn btn-outline-success" href="{% url 'frmt-CI-create' %}"style="width: 18rem;">
+                <i class="bi bi-person-add"></i> Create New
+            </a>
+        </div>
+        <div class="mb-1">
+            <a class="btn btn-outline-info" href="{% url 'frmt-CI-update' object.id %}"style="width: 18rem;" >
+                <i class="bi bi-person-lines-fill"></i> Update
+            </a>
+        </div>
+        <div class="mb-1">
+            <a class="btn btn-outline-danger" href="{% url 'frmt-CI-delete' object.id %}"style="width: 18rem;">
+                <i class="bi bi-person-dash-fill"></i>Delete
+            </a>
+        </div>
+      <div class="col"></div><div class="col"></div>
+      </div>
+    </div>
+    
+</section>
+
+</main>
+{% endblock content %}  

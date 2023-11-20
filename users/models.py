@@ -6,6 +6,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
+
+
+#user models
 class CustomAccountManager(BaseUserManager):
 
     def create_superuser(self, email, user_name, password, **other_fields):
@@ -65,7 +68,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     
 
 
-
+#revenue models
 class Revenue(models.Model):
     REVENUE_TYPE_CHOICES = [
         ('Market Fee', 'market fee'),
@@ -81,6 +84,20 @@ class Revenue(models.Model):
     def __str__(self):
         return self.revenue_type
 
+
+#registered business models
+class Business(models.Model):
+    name = models.CharField(max_length=150)
+    owner = models.CharField(max_length=150)
+    description = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.name 
+    
+    def get_absolute_url(self):
+        return reverse("frmt-business-detail", kwargs={"pk": self.pk})
+
+#collection instances implementation
 class Collection_instance(models.Model):
     
     name=models.CharField(max_length=150, null=True)
@@ -104,8 +121,12 @@ def update_collector(sender, instance, **kwargs):
         instance.save()
       
 
+#transaction models
 class Transaction(models.Model):
-    STATUSES=['Pending', 'Completed', 'Failed']
+    STATUSES=(('P','Pending'),
+              ('C','Completed'),
+              ('F','Failed') 
+              )
     
     transationID=models.BigAutoField(primary_key=True)
     payerID = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='payer_id')
@@ -114,9 +135,12 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=5, decimal_places=2)
     receipt_info = models.CharField(max_length=150)
     date_time = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=150)
+    status = models.CharField(max_length=150, choices=STATUSES)
 
     def __str__(self):
         return self.receipt_info
+    
+    def get_absolute_url(self):
+        return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})
 
 

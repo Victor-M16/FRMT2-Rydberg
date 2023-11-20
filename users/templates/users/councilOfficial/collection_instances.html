@@ -14,56 +14,64 @@
 
     <section class="section dashboard">
       <div class="row">
-  
-        
-        <div class="container">
-          <table class="table table-hover">
-            <h3>Collection Instances</h3>
-            <thead>
-            <tr>
-              <th scope="col">CI Name</th>
-              <th scope="col">Jurisdiction</th>
-              <th scope="col">Collector</th>
-              <th scope="col">Revenue Type</th>
-              <th scope="col">Amount</th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for collection_instance in collection_instances  %}
-              <tr>
-                <td>{{collection_instance.name}}</td>
-                <td>{{collection_instance.jurisdiction}}</td>
-                <td>{{collection_instance.collector}}</td>
-                <td>{{collection_instance.collected_revenue}}</td>
-                <td>{{collection_instance.amount}}</td>
-                <td class="align-middle">
-                  <a
-                    href="{% url 'frmt-CI-detail' collection_instance.id %}"
-                    class="text-secondary font-weight-bold text-xs"
-                    data-toggle="tooltip"
-                    data-original-title="Edit user"
-                  >
-                    View
-                  </a>
-                </td>
-              </tr>
+        <div class="col-lg-12">
+
             
-            {% endfor %}
-            </tbody>
-          </table>
-          <div class="row">
-            <div class="col sm-4">
-              <a href="{% url 'frmt-CI-create' %}">
-                <button class="btn btn-outline-success" type="submit"><i class="bi bi-person-add"></i> Create New </button>
-              </a>  
-            </div>  
-          </div> 
-        </div>
-        
+         <!-- Start Table -->
+         <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Collection Instances</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jurisdiction</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Amount</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for collection_instance in collection_instances  %}
+                      <tr>
+                        <td>{{collection_instance.name}}</td>
+                        <td>{{collection_instance.jurisdiction}}</td>
+                        <td>{{collection_instance.collector}}</td>
+                        <td>{{collection_instance.collected_revenue}}</td>
+                        <td>{{collection_instance.amount}}</td>
+                        <td class="align-middle">
+                          <a
+                            href="{% url 'frmt-CI-detail' collection_instance.id %}"
+                            class="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="Edit user"
+                          >
+                            View
+                          </a>
+                        </td>
+                      </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Table -->
 
-        
 
+        <div class="row">
+          <div class="col sm-4">
+            <a href="{% url 'frmt-CI-create' %}">
+              <button class="btn btn-outline-success" type="submit"><i class="bi bi-person-add"></i> Create New </button>
+            </a>  
+          </div>  
+        </div> 
       </div>
     </section>
 
