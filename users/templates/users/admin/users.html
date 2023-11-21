@@ -1,111 +1,16 @@
-{% extends "users/base.html" %} {% load static %} {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+{% extends "users/base.html" %}
+{% load static %} 
+{% block content %}
 
-    <title>Users</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+  <body>  
 
-    <!-- Favicons -->
-    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
-    <link
-      href="{% static 'assets/img/apple-touch-icon.png' %}"
-      rel="apple-touch-icon"
-    />
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link
-      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/quill/quill.snow.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/simple-datatables/style.css' %}"
-      rel="stylesheet"
-    />
-
-    <!-- Template Main CSS File -->
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-
-    <!-- Fonts and Icons -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-      rel="stylesheet"
-    />
-
-    <!-- Nucleo Icons -->
-    <link href="{% static 'assets2/css/nucleo-icons.css' %}" rel="stylesheet" />
-    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
-
-    <!-- Font Awesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"
-    ></script>
-    <link href="{% static 'assets2/css/nucleo-svg.css' %}" rel="stylesheet" />
-
-    <!-- CSS Files -->
-    <link
-      id="pagestyle"
-      href="{% static 'assets2/css/soft-ui-dashboard.css?v=1.0.7' %}"
-      rel="stylesheet"
-    />
-
-    <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is an easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA, and PECR. -->
-    <script
-      defer
-      data-site="YOUR_DOMAIN_HERE"
-      src="https://api.nepcha.com/js/nepcha-analytics.js"
-    ></script>
-
-    
-
-  </head>
-
-  <body>
+  {% block trial %}
     <main id="main" class="main">
       <div class="pagetitle">
         <h1>Users</h1>
         <nav>
           <ol class="breadcrumb">
+            <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item active">Users</li>
           </ol>
         </nav>
@@ -118,9 +23,10 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-grid gap-2 mt-3">
-                  <button class="btn btn-primary" type="button">
+                  <a class="btn btn-primary" href="{% url 'frmt-register' %}">
                     Add Users
                   </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -130,9 +36,10 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-grid gap-2 mt-3">
-                  <button class="btn btn-primary" type="button">
+                  <a href="{% url 'frmt-register' %}" class="btn btn-primary">
                     Add Collectors
                   </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -152,6 +59,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User Type</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Created</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,9 +94,10 @@
                     {% endif %}
                                          
                   </td>
+                  <td>{{user.start_date}}</td>
                   <td class="align-middle">
                     <a
-                      href="javascript:;"
+                      href="{% url 'frmt-newuser-detail' user.id%}"
                       class="text-secondary font-weight-bold text-xs"
                       data-toggle="tooltip"
                       data-original-title="Edit user"
@@ -276,7 +185,8 @@
         </div>
       </section>
     </main>
-    <!-- End #main -->
+    <!-- End #main -->  
+  {% endblock trial %}
   </body>
 </html>
 {% endblock content %}

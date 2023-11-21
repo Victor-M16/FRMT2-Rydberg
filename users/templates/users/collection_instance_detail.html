@@ -1,4 +1,4 @@
-{% extends "users/base.html" %}    
+{% extends "users/base_glow.html" %}    
 {% block content %}
 <main id="main" class="main">
   <section class="section dashboard">
@@ -25,17 +25,17 @@
       <div class="col">
         <div class="mb-1">
             <a class="btn btn-outline-success" href="{% url 'frmt-CI-create' %}"style="width: 18rem;">
-                <i class="bi bi-person-add"></i> Create New
+                Create New
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-outline-info" href="{% url 'frmt-CI-update' object.id %}"style="width: 18rem;" >
-                <i class="bi bi-person-lines-fill"></i> Update
+                Update
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-outline-danger" href="{% url 'frmt-CI-delete' object.id %}"style="width: 18rem;">
-                <i class="bi bi-person-dash-fill"></i>Delete
+                Delete
             </a>
         </div>
       <div class="col"></div><div class="col"></div>
