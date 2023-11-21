@@ -43,20 +43,14 @@ from .views import (
 # urls.py
 from django.urls import path, include
 from rest_framework import routers
-from .views import NewUserViewSet
-
-router = routers.DefaultRouter()
-router.register(r'users', NewUserViewSet)
+from .views import LoginView, BusinessByLocationView
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-]
+     path('api/login/', LoginView.as_view(), name='api-login'),
 
 
+     path('locations/<int:location_id>/business/', BusinessByLocationView.as_view(), name='business-by-location'),
 
-
-urlpatterns = [
    
      path('', Home.as_view(), name='frmt-home'),
 
@@ -78,8 +72,7 @@ urlpatterns = [
 
 
 
-    #urls for collectors
-    path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
+     path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
 
 
 

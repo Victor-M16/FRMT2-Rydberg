@@ -65,6 +65,24 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     
     def get_absolute_url(self):
         return reverse("frmt-newuser-detail", kwargs={"pk": self.pk})
+
+
+
+#Location models
+class Location(models.Model):
+
+    name = models.CharField(max_length=150)
+
+
+    class Meta:
+        verbose_name = _("Location")
+        verbose_name_plural = _("Locations")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("location_detail", kwargs={"pk": self.pk})
     
 
 
@@ -74,7 +92,8 @@ class Revenue(models.Model):
         ('Market Fee', 'market fee'),
         ('Business Tax', 'business tax'),
         ('City Rate', 'city rate'),
-        ('License Fee', 'license fee')
+        ('License Fee', 'license fee'),
+        ('Parking Fee', 'parking fee')
     ]
 
     revenueID=models.AutoField(primary_key=True)
@@ -90,7 +109,9 @@ class Business(models.Model):
     name = models.CharField(max_length=150)
     owner = models.CharField(max_length=150)
     description = models.CharField(max_length=500)
-
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default= 1 )
+    
+    
     def __str__(self):
         return self.name 
     
@@ -147,25 +168,6 @@ class Transaction(models.Model):
     def get_absolute_url(self):
         return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})
     
-
-
-
-
-#Location models
-class Location(models.Model):
-
-    name = models.CharField(max_length=150)
-
-
-    class Meta:
-        verbose_name = _("Location")
-        verbose_name_plural = _("Locations")
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("location_detail", kwargs={"pk": self.pk})
 
 
 
