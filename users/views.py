@@ -23,6 +23,9 @@ def home(request):
     }
     return render(request, 'users/home.html', context )
 
+def index(request):
+    return render(request, 'newTemplates/index.html', {} )
+
 class Collection_instanceListView(LoginRequiredMixin, ListView):
     model = Collection_instance
     template_name = "users/councilOfficial/collection_instances.html"

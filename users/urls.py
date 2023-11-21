@@ -11,7 +11,7 @@ from . import views
 
 
 urlpatterns = [
-     path('', views.home, name='frmt-home'),
+     path('', views.index, name='frmt-home'),
      #path('CI/', views.displayCollectionInstances, name='frmt-c-instances'),
      path('register/', views.register, name='frmt-register'),
      path('profile/', views.profile, name = 'frmt-profile'),
