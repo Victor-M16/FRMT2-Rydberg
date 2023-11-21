@@ -107,6 +107,7 @@ class Collection_instance(models.Model):
     collector = models.ForeignKey(NewUser, verbose_name=_("Collector"), on_delete=models.CASCADE)
     collected_revenue = models.ForeignKey(Revenue, on_delete=models.CASCADE, to_field='revenue_type')
     amount = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    date_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name 

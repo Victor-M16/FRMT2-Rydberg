@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+
 from .views import (
 
     my_Collection_instanceListView, 
@@ -37,6 +38,18 @@ from .views import (
 
 
     )
+# urls.py
+from django.urls import path, include
+from rest_framework import routers
+from .views import NewUserViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', NewUserViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+]
 
 
 
@@ -48,6 +61,7 @@ urlpatterns = [
      #path('CI/', views.displayCollectionInstances, name='frmt-c-instances'),
      #path('register/', views.register, name='frmt-register'),
      
+
      path('dashboard/', views.dashboard, name = 'frmt-dashboard'),
      path('dashboard/parameters/', views.parameters, name = 'frmt-parameters'),
 
@@ -62,8 +76,9 @@ urlpatterns = [
 
 
 
+    #urls for collectors
+    path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
 
-     
 
 
 
@@ -109,28 +124,27 @@ urlpatterns = [
 
 
 
+     #market collections for the council official to see, basically revenue
+     path('market/', views.market, name='frmt-market'),
+
+
      #new added pages
-     
-     path('users/', views.users, name='users'),
-     #collector's market collections
-     path('market/', views.market, name='market'),
-
-
 
      #collector types? they are like revenue types.. for fahad but I will currently use with revenue types model
-     path('collections/', views.collections, name='collections'),
+     #seem like collection instances, will ignore for now
+     #path('collections/', views.collections, name='collections'),
 
 
-     path('myprofile/', views.usersProfile, name='profile'),
-     path('users/profile', views.collectorsProfile, name='collectorprofile'),
-     path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
-
-     
-     path('instances/', views.collectorInstances, name='instances'),
-     path('myinfo/', views.collectorDashProfile, name='collector-info'),
+    #ignore profile changes
+     #path('myprofile/', views.usersProfile, name='profile'),
+     #path('users/profile', views.collectorsProfile, name='collectorprofile'),
 
 
 
+
+     #already implemented CI and profile will ignore for now
+     #path('instances/', views.collectorInstances, name='instances'),
+     #path('myinfo/', views.collectorDashProfile, name='collector-info'),
 
 
      #extras
