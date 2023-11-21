@@ -36,6 +36,8 @@ from .views import (
     PropertyListView,
     PropertyUpdateView,
 
+    Home
+
 
     )
 # urls.py
@@ -56,7 +58,7 @@ urlpatterns = [
 
 urlpatterns = [
    
-     path('', views.home, name='frmt-home'),
+     path('', Home.as_view(), name='frmt-home'),
 
      #path('CI/', views.displayCollectionInstances, name='frmt-c-instances'),
      #path('register/', views.register, name='frmt-register'),
