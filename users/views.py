@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, LocationForm, CollectionTypeForm, CollectionInstanceForm
 from .models import NewUser, Revenue, Transaction, Collection_instance
+from django.http import HttpResponseRedirect
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -11,6 +12,7 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import CollectionType, CollectionInstance
 
 def home(request):
     context = {
@@ -171,7 +173,10 @@ def market(request):
     return render(request, 'newTemplates/market.html', {})
 
 def collections(request):
-    return render(request, 'newTemplates/collections.html', {})
+    collection_type = CollectionType.objects.all()
+    collection_instance = CollectionInstance.objects.all()
+    return render(request, 'newTemplates/collections.html', {
+        'collectionType': collection_type, 'collectionInstance': collection_instance})
 
 def usersProfile(request):
     return render(request, 'newTemplates/users-profile.html', {})
@@ -187,3 +192,67 @@ def collectorInstances(request):
 
 def collectorDashProfile(request):
     return render(request, 'newTemplates/collector-dash-profile.html', {})
+
+def addLocation(request):
+    submitted = False
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/location/add?submitted=True')
+    else:
+        form = LocationForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request, 'newTemplates/add_location.html', {'form':form, 'submitted':submitted})
+
+def addCollectionType(request):
+    submitted = False
+    if request.method == "POST":
+        form = CollectionTypeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/type/add?submitted=True')
+    else:
+        form = CollectionTypeForm
+        if 'submitted' in request.GET:
+            submitted = True
+        
+    form = CollectionTypeForm
+    return render(request, 'newTemplates/add_collection_type.html', {'form':form, 'submitted':submitted})
+
+# def editCollectionType(request, typeID):
+#     collectionType = CollectionType.objects.get(pk=typeID)
+#     return render(request, 'newTemplates/edit_collection_types.html', {'collectionType':collectionType})
+
+def deleteCollectionType(request, collectionType_id):
+    collectionType = CollectionType.objects.get(pk=collectionType_id)
+    # collectionType = get_object_or_404(CollectionType, id=collectionType_id)
+    collectionType.delete()
+    return redirect('collections')
+
+# class CollectionTypeDeleteView(DeleteView):
+#     model = CollectionType
+#     success_url = '/collections/'
+
+def addCollectionInstance(request):
+    submitted = False
+    if request.method == "POST":
+        form = CollectionInstanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/instance/add?submitted=True')
+    else:
+        form = CollectionInstanceForm
+        if 'submitted' in request.GET:
+            submitted = True
+        
+    form = CollectionInstanceForm
+    return render(request, 'newTemplates/add_collection_instance.html', {'form':form, 'submitted':submitted})
+
+def deleteCollectionInstance(request, collectionInstance_id):
+    collectionInstance = CollectionInstance.objects.get(pk=collectionInstance_id)
+    # collectionType = get_object_or_404(CollectionType, id=collectionType_id)
+    collectionInstance.delete()
+    return redirect('collections')

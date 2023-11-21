@@ -12,8 +12,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static 'assets/img/logo.png' %}" rel="icon">
-  <link href="{% static 'assets/img/logo.png' %}" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
  
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -285,155 +285,69 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Collections Types</h1>
+      <h1>Add Location</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active">Collections Tyeps</li>
+          <li class="breadcrumb-item active">Add Location</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <div class="d-grid gap-2 mt-3">
-                <a href="{% url "add-collection-type" %}"><button  class="btn btn-primary" type="button">
-                  Add Collection Type</button></a>
+            <div class="card">
+                <div class="card-body">
+
+                    {% if submitted %}
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <div><h5>Collection Type Added Successifully!</h5></div>
+                        <div><a href="{% url "collections" %}"><button  class="btn btn-primary" type="button">
+                            Back</button></a></div>
+                     </div>
+                    {% else %}
+
+                  <h5 class="card-title">Vertical Form</h5>
+    
+                  <!-- Vertical Form -->
+                  <form class="row g-3" action="" method=POST>
+                    {% csrf_token %}
+
+                    {% comment %} <div class="col-12">
+                      <label for="inputName" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="inputName">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="location" class="form-label">Location</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                            <option>...</option>
+                        </select>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="text" class="form-control" id="amount">
+                      </div> {% endcomment %}
+
+                      {{form.as_p}}
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form><!-- Vertical Form -->
+
+                  {% endif %}
+    
+                </div>
               </div>
-            </div>
-          </div>
 
         </div>
 
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <div class="d-grid gap-2 mt-3">
-                <a href="{% url "add-location" %}"><button  class="btn btn-primary" type="button">
-                  Add Location</button></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-         <!-- Start Table -->
-         <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Collections Types</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Juristicyion</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    {% for collection in collectionType %}
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{collection}}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{collection.location}}</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">MK {{collection.amount}}</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="{% url 'frmt-CT-delete' collection.id%}" class="link-danger font-weight-bold text-xs" 
-                        data-toggle="tooltip" data-original-title="Edit user" onclick="return confirm('Are you sure you want to delete this?')">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                   
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div><!-- End Table -->
-
-         <!-- Start Table -->
-         <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Collections Instances</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Juristion</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    {% for instance in collectionInstance %}
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{instance}}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{instance.location}}</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{instance.collector}}</p>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">{{instance.collection_type}}</p>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">MK {{instance.amount}}</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="{% url 'instance-delete' instance.id%}" class="link-danger font-weight-bold text-xs" 
-                        data-toggle="tooltip" data-original-title="Edit ser" onclick="return confirm('Are you sure you want to delete this?')">
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                    {% endfor %}
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div><!-- End Table -->
-
-        <div class="col-lg-4">
-          <a href="{% url "add-collection-instance" %}"><button  class="btn btn-primary" type="button">
-            Create New Instance</button></a>
-        </div>
-
+      
       </div>
     </section>
 
