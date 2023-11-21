@@ -1,8 +1,16 @@
 # serializers.py
 from rest_framework import serializers
 from .models import NewUser
+from .models import Business
 
-class NewUserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewUser
-        fields = ['user_name', 'email', 'is_staff']  # Add your custom fields as needed
+        fields = ('id', 'email', 'user_name', 'user_type')
+
+
+
+class BusinessSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Business
+        fields = ['id', 'name']

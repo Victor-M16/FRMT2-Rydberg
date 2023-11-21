@@ -23,16 +23,54 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
-
+#API views##############################################
 # views.py
-from rest_framework import viewsets
-from .serializers import NewUserSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
+from .serializers import UserSerializer
+from django.contrib.auth import authenticate
+from rest_framework.generics import ListAPIView
+from .serializers import BusinessSerializer
 
-class NewUserViewSet(viewsets.ModelViewSet):
-    queryset = NewUser.objects.all()
-    serializer_class = NewUserSerializer
+
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        user = authenticate(request, email=email, password=password)
+
+        if user:
+            token, created = Token.objects.get_or_create(user=user)
+            serializer = UserSerializer(user)
+            return Response({'status': True, 'user': serializer.data, 'token': token.key})
+        else:
+            return Response({'status': False, 'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
+
+
+class BusinessByLocationView(ListAPIView):
+    serializer_class = BusinessSerializer
+
+    def get_queryset(self):
+        location_id = self.kwargs['location_id']
+        return Business.objects.filter(location_id=location_id)
+
+
+
+
+
+
+
+
+
+#actual FRMT functionality views
 class Home(LoginRequiredMixin, View):
     template_name = 'users/home.html'
 
