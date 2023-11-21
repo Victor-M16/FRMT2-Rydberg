@@ -149,6 +149,26 @@ class Transaction(models.Model):
     
 
 
+
+
+#Location models
+class Location(models.Model):
+
+    name = models.CharField(max_length=150)
+
+
+    class Meta:
+        verbose_name = _("Location")
+        verbose_name_plural = _("Locations")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("location_detail", kwargs={"pk": self.pk})
+
+
+
 #property models
 class Property(models.Model):
     LAND_USE_TYPES=(('Domestic','Domestic'),
@@ -160,6 +180,7 @@ class Property(models.Model):
     capital_value = models.DecimalField(max_digits=30, decimal_places=2)
     name = models.CharField(max_length=150)
     rates_owed = models.DecimalField(max_digits=30, decimal_places=2, null= True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default= 1 )
 
 
     class Meta:
@@ -167,10 +188,7 @@ class Property(models.Model):
         verbose_name_plural = _("Properties")
 
     def __str__(self):
-        return self.plot_number
+        return self.name
 
     def get_absolute_url(self):
         return reverse("frmt-property-detail", kwargs={"pk": self.pk})
-
-
-

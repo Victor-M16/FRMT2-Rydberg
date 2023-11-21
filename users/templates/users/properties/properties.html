@@ -34,7 +34,7 @@
                     <i class="ri-hotel-line"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>15 188</h6>
+                    <h6>{{property_count}}</h6>
                     <span class="text-success small pt-1 fw-bold">7 NEW</span> <span class="text-muted small pt-2 ps-1"></span>
 
                   </div>
@@ -56,9 +56,8 @@
                                 <i class="bi bi-cash"></i>
                               </div>
                               <div class="ps-3">
-                                <h6>MK1 264 430</h6>
+                                <h6>MK{{total_rates_due}}</h6>
                                 <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-          
                               </div>
                             </div>
                           </div>
@@ -66,39 +65,40 @@
                         </div>
                       </div><!-- End Revenue Card -->
 
-          <!-- Revenue Card -->
-          <div class="col-xxl-4 col-md-5">
-            <div class="card info-card revenue-card">
+                      <!-- Top Property Card -->
+                      <div class="col-xxl-4 col-md-5">
+                        <div class="card info-card revenue-card">
 
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
+                          <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                              <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                              </li>
 
-                  <li><a class="dropdown-item" href="#">Total</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
+                              <li><a class="dropdown-item" href="#">Total</a></li>
+                              <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                          </div>
 
-              <div class="card-body">
-                <h5 class="card-title">Top Property <span>| Blantyre City</span></h5>
+                          <div class="card-body">
+                            <h5 class="card-title">Top Property <span>| Location</span></h5>
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cash"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>MK31 264 430 000</h6>
-                    <span class="text-success small pt-1 fw-bold">Chayamba House</span> <span class="text-muted small pt-2 ps-1"></span>
+                            <div class="d-flex align-items-center">
+                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-cash"></i>
+                              </div>
+                              <div class="ps-3">
+                                <h6>MK{{highest_valued_property.capital_value}}</h6>
+                                <span class="text-success small pt-1 fw-bold">{{highest_valued_property}} <span>| {{highest_valued_property.land_use}}</span></span> 
 
-                  </div>
-                </div>
-              </div>
+                              </div>
+                            </div>
+                          </div>
 
-            </div>
-          </div><!-- End Revenue Card -->
+                        </div>
+                      </div><!-- End Top Property Card -->
+
 
           <!-- Reports -->
           <div class="col-12">
@@ -130,14 +130,13 @@
                     enabled: false
                   },
                   xaxis: {
-                    categories: ['Nancholi', 'Mandala', 'Chilimba', 'Napeli', 'Mbayani', 'Bangwe', 'Ndirande',
-                      'Chichiri', 'Mibawa', 'Limbe'
-                    ],
+                    categories: {{locations|safe}}
                   }
                 }).render();
               });
             </script>
             <!-- End Bar Chart -->
+            
 
               </div>
 
@@ -157,7 +156,7 @@
                 <script>
                   document.addEventListener("DOMContentLoaded", () => {
                     new ApexCharts(document.querySelector("#pieChart"), {
-                      series: [44, 55, 13, 43, 22],
+                      series: {{land_uses_values|safe}},
                       chart: {
                         height: 350,
                         type: 'pie',
@@ -165,7 +164,7 @@
                           show: true
                         }
                       },
-                      labels: ['Industrial', 'Resident', 'Institutional', 'Retail', 'Office']
+                      labels: {{land_uses|safe}},
                     }).render();
                   });
                 </script>

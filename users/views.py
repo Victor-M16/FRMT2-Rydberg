@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+from django.db import models
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -10,6 +11,7 @@ from .models import (
     Collection_instance,
     Business,
     Property,
+    Location,
     )
 from django.views.generic import (
     ListView, 
@@ -19,6 +21,7 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 
 
 # views.py
@@ -30,6 +33,50 @@ class NewUserViewSet(viewsets.ModelViewSet):
     serializer_class = NewUserSerializer
 
 
+class Home(LoginRequiredMixin, View):
+    template_name = 'users/home.html'
+
+    def get_context_data(self, **kwargs):
+        
+
+        # Calculate total rates due
+        total_amount = Collection_instance.objects.all().aggregate(total_amount=Sum('amount'))['total_amount']
+
+        # Get unique collection types and their counts
+        collection_types_counts = (
+            Collection_instance.objects.values('collected_revenue').annotate(count=models.Count('collected_revenue'))
+        )
+
+        collection_types = [item['collected_revenue'] for item in collection_types_counts]
+        collection_types_values = [item['count'] for item in collection_types_counts]
+        collection_types_counts_dict = {item['collected_revenue']: item['count'] for item in collection_types_counts}
+
+        revenueTypes = []
+        amounts = []
+
+        queryset = Collection_instance.objects.all()
+
+        for instance in queryset:
+            revenueTypes.append(str(instance.collected_revenue))
+            temp = str(instance.amount)
+            amounts.append(temp)
+
+
+
+        return {'revenueTypes':revenueTypes,
+                'amounts':amounts,
+                'collection_types':collection_types,
+                'collection_types_values':collection_types_values,
+                'total_amount': total_amount,
+                'users' : NewUser.objects.all(),
+                'collection_instances':Collection_instance.objects.all(),
+                'transactions':Transaction.objects.all(),
+                'revenue_types':Revenue.objects.all(),
+                }
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        return render(request, self.template_name, context)
 
 
 
@@ -43,40 +90,6 @@ def landing(request):
     #return render(request, 'users/dashboards/base.html', context )
     return render(request, 'users/landing.html', context )
 
-@login_required
-def home(request):
-    
-    labels = []
-    data = []
-
-    revenueTypes = []
-    amounts = []
-    totals = Collection_instance.objects.values('collector__user_name', 'collected_revenue__revenue_type').annotate(total_amount= Sum('amount')),
-
-
-    queryset = Collection_instance.objects.all()
-    
-
-    current_user = request.user  # Get the currently logged-in user
-    for instance in queryset:
-            revenueTypes.append(str(instance.collected_revenue))
-            temp = str(instance.amount)
-            amounts.append(temp)
-
-    context = {
-        'users':NewUser.objects.all(),
-        'collection_instances':Collection_instance.objects.all(),
-        'transactions':Transaction.objects.all(),
-        'revenue_types':Revenue.objects.all(),
-        'data_from_backend' : Collection_instance.objects.values('collector__user_name', 'collected_revenue__revenue_type').annotate(total_amount= Sum('amount')),
-        'labels' : labels ,
-        'data' : data ,
-        'revenueTypes' : revenueTypes,
-        'amounts' : amounts,
-    }
-    print(revenueTypes)
-    print(amounts)
-    return render(request, 'users/home.html', context )
 
 @login_required
 def displayCollectionInstances(request):
@@ -262,6 +275,7 @@ class my_Collection_instanceListView(LoginRequiredMixin, ListView):
     context_object_name = "my_collection_instances"
 
     def get_queryset(self):
+        
         # Assuming current_user is the user making the request
         current_user = self.request.user
 
@@ -399,6 +413,53 @@ class PropertyListView(LoginRequiredMixin, ListView):
     model = Property
     template_name = "users/properties/properties.html"
     context_object_name = "properties"
+
+    def get_queryset(self):
+        return Property.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        locations_queryset = Location.objects.all()
+        locations_list = []
+
+
+        land_uses = Property.objects.values_list('land_use', flat=True).distinct()
+
+
+        # Get unique land uses and their counts
+        land_uses_counts = (
+            Property.objects.values('land_use').annotate(count= models.Count('land_use'))
+        )
+
+        land_uses = [item['land_use'] for item in land_uses_counts]
+        land_uses_values = [item['count'] for item in land_uses_counts]
+        land_uses_counts_dict = {item['land_use']: item['count'] for item in land_uses_counts}
+
+
+
+        for instance in locations_queryset:
+            locations_list.append(str(instance.name))
+
+        
+        # Calculate property count
+        property_count = self.get_queryset().count()
+
+        # Get the highest valued property
+        highest = self.get_queryset().order_by('-capital_value').first()
+
+        # Calculate total rates due
+        rates_due = self.get_queryset().aggregate(total_rates_due=Sum('rates_owed'))['total_rates_due']
+
+        # Add additional context names and their corresponding values
+        context['property_count'] = property_count
+        context['highest_valued_property'] = highest
+        context['total_rates_due'] = rates_due
+        context['locations'] = locations_list
+        context['land_uses'] = land_uses
+        context['land_uses_values'] = land_uses_values
+
+        return context
 
 
 class PropertyDetailView(LoginRequiredMixin, DetailView):
