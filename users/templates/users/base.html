@@ -331,41 +331,41 @@
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-users' %}">
             <i class="bi bi-person-fill"></i>
-            <span>View Users</span>
+            <span>Users</span>
           </a>
         </li>
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
             <i class="bi bi-building"></i>
-            <span>View Businesses</span>
+            <span>Businesses</span>
           </a>
         </li><!-- End Profile Page Nav -->
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
             <i class="bi bi-cash"></i>
-            <span>View Transactions</span>
+            <span>Transactions</span>
           </a>
         </li><!-- End Profile Page Nav -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
             <i class="bi bi-cash"></i>
-            <span>View Collection Instances</span>
+            <span>Collection Instances</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
             <i class="bi bi-house"></i>
-            <span>View Properties</span>
+            <span>Properties</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
             <i class="bi bi-clipboard-data"></i>
-            <span>View Market Collections</span>
+            <span>Market Collections</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
   
@@ -415,21 +415,21 @@
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-business-list' %}">
             <i class="bi bi-building"></i>
-            <span>View Businesses</span>
+            <span>Businesses</span>
           </a>
         </li><!-- End Profile Page Nav -->
         
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-register' %}">
             <i class="bi bi-person"></i>
-            <span>View Collectors</span>
+            <span>Collectors</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
             <i class="bi bi-box-arrow-in-right"></i>
-            <span>View Collection Instances</span>
+            <span>Collection Instances</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
   
@@ -610,6 +610,39 @@
 
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+<script>
+  $(document).ready(function () {
+    // Function to update the revenue card content
+    function updateRevenueCard(filter) {
+      // Make an AJAX request to your server to get the total amount based on the selected filter
+      $.ajax({
+        url: '/path/to/your/endpoint', // Replace with the actual URL of your server endpoint
+        method: 'GET',
+        data: { filter: filter },
+        success: function (data) {
+          // Update the card content with the received data
+          $('.revenue-card h5.card-title span').text('| ' + filter);
+          $('.revenue-card h6').text('MK' + data.total_amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        },
+        error: function () {
+          console.error('Error fetching data');
+        },
+      });
+    }
+
+    // Event listener for dropdown item clicks
+    $('.dropdown-item').click(function (event) {
+      event.preventDefault();
+      var selectedFilter = $(this).text().trim();
+      updateRevenueCard(selectedFilter);
+    });
+
+    // Initial load (default to Today)
+    updateRevenueCard('Today');
+  });
+</script>
 
 </body>
 

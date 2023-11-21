@@ -48,7 +48,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     )
 
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, )
     user_type = models.CharField(max_length=150, null=True, choices=USER_TYPE_CHOICES)
     start_date = models.DateTimeField(default=timezone.now)
 

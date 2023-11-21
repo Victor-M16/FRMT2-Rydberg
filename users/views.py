@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+from django.utils import timezone
 from django.db import models
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -75,9 +76,31 @@ class Home(LoginRequiredMixin, View):
     template_name = 'users/home.html'
 
     def get_context_data(self, **kwargs):
-        
 
-        # Calculate total rates due
+        
+        today = timezone.now().date()
+
+        #day implementation
+        total_amount_today = Collection_instance.objects.filter(date_time__date=today).aggregate(total_amount=Sum('amount'))['total_amount']
+
+        #month implementation
+        start_of_month = today.replace(day=1)
+
+        total_amount_this_month = Collection_instance.objects.filter(
+            date_time__date__gte=start_of_month,
+            date_time__date__lte=today
+        ).aggregate(total_amount=Sum('amount'))['total_amount']
+
+        #year implementations
+        start_of_year = today.replace(month=1, day=1)
+
+        total_amount_this_year = Collection_instance.objects.filter(
+            date_time__gte=start_of_year,
+            date_time__lte=today
+        ).aggregate(total_amount=Sum('amount'))['total_amount']
+
+
+        # all-time implementations
         total_amount = Collection_instance.objects.all().aggregate(total_amount=Sum('amount'))['total_amount']
 
         # Get unique collection types and their counts
@@ -106,6 +129,9 @@ class Home(LoginRequiredMixin, View):
                 'collection_types':collection_types,
                 'collection_types_values':collection_types_values,
                 'total_amount': total_amount,
+                'total_amount_this_year': total_amount_this_year,
+                'total_amount_this_month': total_amount_this_month,
+                'total_amount_today': total_amount_today,
                 'users' : NewUser.objects.all(),
                 'collection_instances':Collection_instance.objects.all(),
                 'transactions':Transaction.objects.all(),
