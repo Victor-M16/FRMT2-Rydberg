@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -20,6 +21,18 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+# views.py
+from rest_framework import viewsets
+from .serializers import NewUserSerializer
+
+class NewUserViewSet(viewsets.ModelViewSet):
+    queryset = NewUser.objects.all()
+    serializer_class = NewUserSerializer
+
+
+
+
+
 def landing(request):
     context = {
         'users':NewUser.objects.all(),
@@ -32,12 +45,37 @@ def landing(request):
 
 @login_required
 def home(request):
+    
+    labels = []
+    data = []
+
+    revenueTypes = []
+    amounts = []
+    totals = Collection_instance.objects.values('collector__user_name', 'collected_revenue__revenue_type').annotate(total_amount= Sum('amount')),
+
+
+    queryset = Collection_instance.objects.all()
+    
+
+    current_user = request.user  # Get the currently logged-in user
+    for instance in queryset:
+            revenueTypes.append(str(instance.collected_revenue))
+            temp = str(instance.amount)
+            amounts.append(temp)
+
     context = {
         'users':NewUser.objects.all(),
         'collection_instances':Collection_instance.objects.all(),
         'transactions':Transaction.objects.all(),
         'revenue_types':Revenue.objects.all(),
+        'data_from_backend' : Collection_instance.objects.values('collector__user_name', 'collected_revenue__revenue_type').annotate(total_amount= Sum('amount')),
+        'labels' : labels ,
+        'data' : data ,
+        'revenueTypes' : revenueTypes,
+        'amounts' : amounts,
     }
+    print(revenueTypes)
+    print(amounts)
     return render(request, 'users/home.html', context )
 
 @login_required
@@ -162,7 +200,7 @@ def users(request):
     return render(request, 'newTemplates/users.html', {})
 
 def market(request):
-    return render(request, 'newTemplates/market.html', {})
+    return render(request, 'users/councilOfficial/market.html', {})
 
 def collections(request):
     return render(request, 'newTemplates/collections.html', {})
