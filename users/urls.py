@@ -49,7 +49,7 @@ urlpatterns = [
      path('api/login/', LoginView.as_view(), name='api-login'),
 
 
-     path('locations/<int:location_id>/business/', BusinessByLocationView.as_view(), name='business-by-location'),
+     path('api/locations/<int:location_id>/business/', BusinessByLocationView.as_view(), name='business-by-location'),
 
    
      path('', Home.as_view(), name='frmt-home'),
