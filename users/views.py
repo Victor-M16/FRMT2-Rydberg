@@ -79,10 +79,10 @@ class BusinessByLocationView(ListAPIView):
 def get_user_active_assignment(request, user_id):
     try:
         # Assuming you have a way to determine the current assignment for the user
-        user_assignment = Collection_instance.objects.filter(collector_id=user_id, date_time__lte=timezone.now()).latest('date_time')
+        user_assignment = CollectionInstance.objects.filter(collector_id=user_id, date_time__lte=timezone.now()).latest('date_time')
         serializer = CollectionInstanceSerializer(user_assignment)
         return Response(serializer.data)
-    except Collection_instance.DoesNotExist:
+    except CollectionInstance.DoesNotExist:
         return Response({'error': 'No active assignment for the user'}, status=404)
  
 class PropertiesByLocationView(APIView):

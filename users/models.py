@@ -183,7 +183,7 @@ class CollectionType(models.Model):
     amount = models.CharField(max_length=60)
     
     def __str__(self):
-        return self.name
+        return self.name+" - "+self.location.name
     
     # def get_absolute_url(self):
     #     return reverse("frmt-CT-detail", kwargs={"pk": self.pk})
@@ -198,7 +198,7 @@ class CollectionInstance(models.Model):
     date_time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.location.name +'/'+ self.collector.user_name +'/'+ self.collection_type.name +'/'+ self.amount
+        return self.location.name +'/'+ self.collector.user_name +'/'+ self.collection_type.name +'/'+ str(self.amount)
     
     def get_absolute_url(self):
         return reverse("frmt-CI-detail", kwargs={"pk": self.pk})
@@ -212,11 +212,11 @@ class Transaction(models.Model):
               ('F','Failed') 
               )
     
-    transaction_type=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
+    transaction_type=models.ForeignKey(CollectionType, on_delete=models.CASCADE, null=True)
     amount = models.DecimalField(max_digits=20, decimal_places=2)
     date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=150, choices=STATUSES)
-    collection_instance_ID = models.ForeignKey(CollectionInstance, on_delete=models.CASCADE)
+    collection_instance_id = models.ForeignKey(CollectionInstance, on_delete=models.CASCADE)
     description = models.TextField()
 
 
