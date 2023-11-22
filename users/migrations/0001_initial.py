@@ -37,6 +37,7 @@ class Migration(migrations.Migration):
         ),
         migrations.CreateModel(
             name='Business',
+<<<<<<< HEAD
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=150)),
@@ -50,11 +51,19 @@ class Migration(migrations.Migration):
                 ('revenueID', models.AutoField(primary_key=True, serialize=False)),
                 ('revenue_type', models.CharField(choices=[('Market Fee', 'market fee'), ('Business Tax', 'business tax'), ('City Rate', 'city rate'), ('License Fee', 'license fee')], max_length=150, unique=True)),
                 ('rate', models.DecimalField(decimal_places=2, max_digits=20)),
+=======
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=150)),
+                ('owner', models.CharField(max_length=150)),
+                ('description', models.CharField(max_length=500)),
+>>>>>>> origin/victor_new
             ],
         ),
         migrations.CreateModel(
-            name='Transaction',
+            name='Revenue',
             fields=[
+<<<<<<< HEAD
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=20)),
                 ('receipt_info', models.CharField(max_length=150)),
@@ -63,6 +72,11 @@ class Migration(migrations.Migration):
                 ('collectorID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='collector_id', to=settings.AUTH_USER_MODEL)),
                 ('payerID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payer_id', to=settings.AUTH_USER_MODEL)),
                 ('revenueID', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='users.revenue')),
+=======
+                ('revenueID', models.AutoField(primary_key=True, serialize=False)),
+                ('revenue_type', models.CharField(choices=[('Market Fee', 'market fee'), ('Business Tax', 'business tax'), ('City Rate', 'city rate'), ('License Fee', 'license fee')], max_length=150, unique=True)),
+                ('rate', models.DecimalField(decimal_places=2, max_digits=20)),
+>>>>>>> origin/victor_new
             ],
         ),
         migrations.CreateModel(

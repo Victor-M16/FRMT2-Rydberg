@@ -123,10 +123,9 @@ class Business(models.Model):
 #collection instances implementation
 class Collection_instance(models.Model):
     
-    name=models.CharField(max_length=150, null=True)
-    jurisdiction = models.CharField(max_length=150)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default= 1 )
     collector = models.ForeignKey(NewUser, verbose_name=_("Collector"), on_delete=models.CASCADE)
-    collected_revenue = models.ForeignKey(Revenue, on_delete=models.CASCADE, to_field='revenue_type')
+    type_to_collect = models.ForeignKey(Revenue, on_delete=models.CASCADE, to_field='revenue_type')
     amount = models.DecimalField(max_digits=20, decimal_places=2, null=True)
     date_time = models.DateTimeField(default=timezone.now)
 
@@ -154,6 +153,7 @@ class Transaction(models.Model):
               ('F','Failed') 
               )
     
+<<<<<<< HEAD
     payerID = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='payer_id')
     collectorID = models.ForeignKey(NewUser, on_delete=models.CASCADE, related_name='collector_id')
     revenueID=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
@@ -164,6 +164,23 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.receipt_info
+=======
+    transaction_type=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
+    amount = models.DecimalField(max_digits=20, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=150, choices=STATUSES)
+    collection_instance_ID = models.ForeignKey(Collection_instance, on_delete=models.CASCADE)
+    description = models.TextField()
+
+
+
+    class Meta:
+        verbose_name = _("Transaction")
+        verbose_name_plural = _("Transactions")
+
+    def __str__(self):
+        return f"Transaction: {self.id}, Amount: {self.amount}, Description: {self.description}"
+>>>>>>> origin/victor_new
     
     def get_absolute_url(self):
         return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})

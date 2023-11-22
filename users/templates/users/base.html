@@ -6,7 +6,11 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
+<<<<<<< HEAD
   <title>Users</title>
+=======
+  <title>{% block title %}FRMT{% endblock %}</title>
+>>>>>>> origin/victor_new
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -316,6 +320,7 @@
   {% if user.user_type == None or user.user_type == 'Admin' %}
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
+<<<<<<< HEAD
 
       <ul class="sidebar-nav" id="sidebar-nav">
   
@@ -576,8 +581,279 @@
 
   
   {% block content %}
+=======
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+>>>>>>> origin/victor_new
   
+        <li class="nav-item">
+          <a class="nav-link " href="{% url "frmt-home" %}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-heading">Pages</li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-users' %}">
+            <i class="bi bi-person-fill"></i>
+            <span>Users</span>
+          </a>
+        </li><!-- End Users Page Nav -->
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
+            <i class="bi bi-building"></i>
+            <span>Businesses</span>
+          </a>
+        </li><!-- End Businesses Page Nav -->
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
+            <i class="bi bi-cash"></i>
+            <span>Transactions</span>
+          </a>
+        </li><!-- End Transactions Page Nav -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
+            <i class="bi bi-cash"></i>
+            <span>Collection Instances</span>
+          </a>
+        </li><!-- Collection Instances Page Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
+            <i class="bi bi-house"></i>
+            <span>Properties</span>
+          </a>
+        </li><!-- Properties Page  Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
+            <i class="bi bi-clipboard-data"></i>
+            <span>Market Collections</span>
+          </a>
+        </li><!-- Market Page Nav -->
+  
+        
+
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-login' %}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li><!-- End Logout Page Nav -->
+        {% endif %}
+        
+  
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+
+  {% endif %}
+
+
+
+
+  {% if user.user_type == "Council Official" %}
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+  
+        <li class="nav-item">
+          <a class="nav-link " href="{% url "frmt-home" %}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-heading">Pages</li>
+  
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
+            <i class="bi bi-building"></i>
+            <span>Businesses</span>
+          </a>
+        </li><!-- End Businesses Page Nav -->
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
+            <i class="bi bi-cash"></i>
+            <span>Transactions</span>
+          </a>
+        </li><!-- End Transactions Page Nav -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
+            <i class="bi bi-cash"></i>
+            <span>Collection Instances</span>
+          </a>
+        </li><!-- Collection Instances Page Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
+            <i class="bi bi-house"></i>
+            <span>Properties</span>
+          </a>
+        </li><!-- Properties Page  Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
+            <i class="bi bi-clipboard-data"></i>
+            <span>Market Collections</span>
+          </a>
+        </li><!-- Market Page Nav -->
+  
+        
+
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-login' %}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li><!-- End Logout Page Nav -->
+        {% endif %}
+        
+  
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+  
+  {% endif %}
+
+
+
+
+
+
+
+
+  {% if user.user_type == "Collector" %}
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+  
+        <li class="nav-item">
+          <a class="nav-link " href="{% url "frmt-home" %}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-heading">Pages</li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-my-c-instances' %}">
+            <i class="bi bi-cash"></i>
+            <span>My Collection Instances</span>
+          </a>
+        </li><!-- My Collection Instances Pages Nav -->
+
+  
+  
+  
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-login' %}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% endif %}
+        
+  
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+  {% endif %}
+
+
+
+  {% if user.user_type == "Revenue Creator" %}
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+  
+        <li class="nav-item">
+          <a class="nav-link " href="{% url "frmt-home" %}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-heading">Pages</li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Revenue Types</span>
+          </a>
+        </li><!-- Revenue Type Creation Nav -->
+
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-login' %}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Login</span>
+          </a>
+        </li><!-- End Login Page Nav -->
+        {% endif %}
+
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+  
+  {% endif %}
+
+
+  
+  
+  
+  <!--Main Area-->
+  {% block content %}
+    
   {% endblock content %}
+<<<<<<< HEAD
+=======
+  <!--End Main Area--> 
+
+>>>>>>> origin/victor_new
 
 
 
@@ -643,7 +919,12 @@
     updateRevenueCard('Today');
   });
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/victor_new
 </body>
 
 </html>
+
+

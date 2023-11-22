@@ -25,7 +25,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
 #API views##############################################
+<<<<<<< HEAD
 # views.py
+=======
+>>>>>>> origin/victor_new
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,7 +37,14 @@ from rest_framework.permissions import AllowAny
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.generics import ListAPIView
+<<<<<<< HEAD
 from .serializers import BusinessSerializer
+=======
+from .serializers import BusinessSerializer, PropertySerializer, TransactionSerializer, CollectionInstanceSerializer
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+>>>>>>> origin/victor_new
 
 
 class LoginView(APIView):
@@ -64,6 +74,7 @@ class BusinessByLocationView(ListAPIView):
         return Business.objects.filter(location_id=location_id)
 
 
+<<<<<<< HEAD
 
 
 
@@ -72,6 +83,40 @@ class BusinessByLocationView(ListAPIView):
 
 
 #actual FRMT functionality views
+=======
+@api_view(['GET'])
+def get_user_active_assignment(request, user_id):
+    try:
+        # Assuming you have a way to determine the current assignment for the user
+        user_assignment = Collection_instance.objects.filter(collector_id=user_id, date_time__lte=timezone.now()).latest('date_time')
+        serializer = CollectionInstanceSerializer(user_assignment)
+        return Response(serializer.data)
+    except Collection_instance.DoesNotExist:
+        return Response({'error': 'No active assignment for the user'}, status=404)
+ 
+class PropertiesByLocationView(APIView):
+
+    def get(self, request, location_id):
+        properties = Property.objects.filter(location_id=location_id)
+        serializer = PropertySerializer(properties, many=True)
+        return Response(serializer.data)
+
+
+
+class TransactionCreateView(APIView):
+
+    def post(self, request):
+        serializer = TransactionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
+
+
+
+#actual FRMT functionality views######################
+>>>>>>> origin/victor_new
 class Home(LoginRequiredMixin, View):
     template_name = 'users/home.html'
 
@@ -444,7 +489,11 @@ class TransactionDetailView(LoginRequiredMixin, DetailView):
     template_name = "users/transactions/transaction_detail.html"
 
 
+<<<<<<< HEAD
 class TransactionCreateView(LoginRequiredMixin, CreateView):
+=======
+class TransactionAppCreateView(LoginRequiredMixin, CreateView):
+>>>>>>> origin/victor_new
     model = Transaction 
     fields = ['name','owner','description',]
     template_name = "users/transactions/transaction_form.html"
@@ -553,4 +602,8 @@ class PropertyUpdateView(LoginRequiredMixin, UpdateView):
 class PropertyDeleteView(LoginRequiredMixin, DeleteView):
     model = Property 
     success_url = '/properties/'
+<<<<<<< HEAD
     template_name = "users/properties/property_confirm_delete.html"
+=======
+    template_name = "users/properties/property_confirm_delete.html"
+>>>>>>> origin/victor_new

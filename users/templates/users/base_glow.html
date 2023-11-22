@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
+<<<<<<< HEAD
     <title>Users Profile</title>
+=======
+    <title>{% block title %}FRMT{% endblock %}</title>
+>>>>>>> origin/victor_new
     <meta content="" name="description">
     <meta content="" name="keywords">
   
@@ -303,41 +307,65 @@
             <i class="bi bi-person-fill"></i>
             <span>Users</span>
           </a>
+<<<<<<< HEAD
         </li>
+=======
+        </li><!-- End Users Page Nav -->
+>>>>>>> origin/victor_new
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
             <i class="bi bi-building"></i>
             <span>Businesses</span>
           </a>
+<<<<<<< HEAD
         </li><!-- End Profile Page Nav -->
+=======
+        </li><!-- End Businesses Page Nav -->
+>>>>>>> origin/victor_new
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
             <i class="bi bi-cash"></i>
             <span>Transactions</span>
           </a>
+<<<<<<< HEAD
         </li><!-- End Profile Page Nav -->
+=======
+        </li><!-- End Transactions Page Nav -->
+>>>>>>> origin/victor_new
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
             <i class="bi bi-cash"></i>
             <span>Collection Instances</span>
           </a>
+<<<<<<< HEAD
         </li><!-- Revenue Type Creation Nav -->
+=======
+        </li><!-- Collection Instances Page Nav -->
+>>>>>>> origin/victor_new
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
             <i class="bi bi-house"></i>
             <span>Properties</span>
           </a>
+<<<<<<< HEAD
         </li><!-- Revenue Type Creation Nav -->
+=======
+        </li><!-- Properties Page  Nav -->
+>>>>>>> origin/victor_new
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
             <i class="bi bi-clipboard-data"></i>
             <span>Market Collections</span>
           </a>
+<<<<<<< HEAD
         </li><!-- Revenue Type Creation Nav -->
+=======
+        </li><!-- Market Page Nav -->
+>>>>>>> origin/victor_new
   
         
 
@@ -355,7 +383,11 @@
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Login</span>
           </a>
+<<<<<<< HEAD
         </li><!-- End Login Page Nav -->
+=======
+        </li><!-- End Logout Page Nav -->
+>>>>>>> origin/victor_new
         {% endif %}
         
   
@@ -382,6 +414,7 @@
         </li><!-- End Dashboard Nav -->
   
         <li class="nav-heading">Pages</li>
+<<<<<<< HEAD
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-business-list' %}">
             <i class="bi bi-building"></i>
@@ -406,6 +439,47 @@
   
   
   
+=======
+  
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
+            <i class="bi bi-building"></i>
+            <span>Businesses</span>
+          </a>
+        </li><!-- End Businesses Page Nav -->
+      
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
+            <i class="bi bi-cash"></i>
+            <span>Transactions</span>
+          </a>
+        </li><!-- End Transactions Page Nav -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
+            <i class="bi bi-cash"></i>
+            <span>Collection Instances</span>
+          </a>
+        </li><!-- Collection Instances Page Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
+            <i class="bi bi-house"></i>
+            <span>Properties</span>
+          </a>
+        </li><!-- Properties Page  Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
+            <i class="bi bi-clipboard-data"></i>
+            <span>Market Collections</span>
+          </a>
+        </li><!-- Market Page Nav -->
+  
+        
+
+
+>>>>>>> origin/victor_new
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
@@ -419,7 +493,11 @@
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Login</span>
           </a>
+<<<<<<< HEAD
         </li><!-- End Login Page Nav -->
+=======
+        </li><!-- End Logout Page Nav -->
+>>>>>>> origin/victor_new
         {% endif %}
         
   
@@ -456,6 +534,7 @@
             <i class="bi bi-cash"></i>
             <span>My Collection Instances</span>
           </a>
+<<<<<<< HEAD
         </li><!-- Revenue Type Creation Nav -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-my-c-instances' %}">
@@ -469,6 +548,10 @@
             <span>My Collection Instances</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
+=======
+        </li><!-- My Collection Instances Pages Nav -->
+
+>>>>>>> origin/victor_new
   
   
   
@@ -517,6 +600,10 @@
           </a>
         </li><!-- Revenue Type Creation Nav -->
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/victor_new
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
@@ -543,11 +630,20 @@
   
   
   
+<<<<<<< HEAD
 
   
   {% block content %}
   
   {% endblock content %}
+=======
+  <!--Main Area-->
+  {% block content %}
+    
+  {% endblock content %}
+  <!--End Main Area--> 
+
+>>>>>>> origin/victor_new
 
 
 
@@ -581,6 +677,43 @@
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 
+<<<<<<< HEAD
 </body>
 
 </html>
+=======
+<script>
+  $(document).ready(function () {
+    // Function to update the revenue card content
+    function updateRevenueCard(filter) {
+      // Make an AJAX request to your server to get the total amount based on the selected filter
+      $.ajax({
+        url: '/path/to/your/endpoint', // Replace with the actual URL of your server endpoint
+        method: 'GET',
+        data: { filter: filter },
+        success: function (data) {
+          // Update the card content with the received data
+          $('.revenue-card h5.card-title span').text('| ' + filter);
+          $('.revenue-card h6').text('MK' + data.total_amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        },
+        error: function () {
+          console.error('Error fetching data');
+        },
+      });
+    }
+
+    // Event listener for dropdown item clicks
+    $('.dropdown-item').click(function (event) {
+      event.preventDefault();
+      var selectedFilter = $(this).text().trim();
+      updateRevenueCard(selectedFilter);
+    });
+
+    // Initial load (default to Today)
+    updateRevenueCard('Today');
+  });
+</script>
+</body>
+
+</html>
+>>>>>>> origin/victor_new
