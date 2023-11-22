@@ -7,6 +7,7 @@
 <section class="section dashboard">
   
 <div class="col-md-6 offset-md-3">
+  <!--Form-->
   <form class="row g-3 needs-validation" method="POST">
     {% csrf_token %}
 
@@ -31,6 +32,7 @@
       <p class="small mb-0">Account already exists? <a href="{% url "frmt-login" %}">Log in</a></p>
     </div>
   </form>
+  <!--End Form-->
 </div>
 
 </section>

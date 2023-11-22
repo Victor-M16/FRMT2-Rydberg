@@ -131,12 +131,12 @@ class Home(LoginRequiredMixin, View):
 
         # Get unique collection types and their counts
         collection_types_counts = (
-            Collection_instance.objects.values('collected_revenue').annotate(count=models.Count('collected_revenue'))
+            Collection_instance.objects.values('type_to_collect').annotate(count=models.Count('type_to_collect'))
         )
 
-        collection_types = [item['collected_revenue'] for item in collection_types_counts]
+        collection_types = [item['type_to_collect'] for item in collection_types_counts]
         collection_types_values = [item['count'] for item in collection_types_counts]
-        collection_types_counts_dict = {item['collected_revenue']: item['count'] for item in collection_types_counts}
+        collection_types_counts_dict = {item['type_to_collect']: item['count'] for item in collection_types_counts}
 
         revenueTypes = []
         amounts = []
@@ -144,7 +144,7 @@ class Home(LoginRequiredMixin, View):
         queryset = Collection_instance.objects.all()
 
         for instance in queryset:
-            revenueTypes.append(str(instance.collected_revenue))
+            revenueTypes.append(str(instance.type_to_collect))
             temp = str(instance.amount)
             amounts.append(temp)
 
@@ -339,7 +339,7 @@ class Collection_instanceDetailView(LoginRequiredMixin, DetailView):
 
 class Collection_instanceCreateView(LoginRequiredMixin, CreateView):
     model = Collection_instance 
-    fields = ['name','jurisdiction','collector','collected_revenue', 'amount']
+    fields = ['location','collector','type_to_collect', 'amount']
 
     #def form_valid(self, form):
      #   form.instance.author = self.request.user
@@ -348,7 +348,7 @@ class Collection_instanceCreateView(LoginRequiredMixin, CreateView):
 
 class Collection_instanceUpdateView(LoginRequiredMixin, UpdateView):
     model = Collection_instance 
-    fields = ['name','jurisdiction','collector','collected_revenue', 'amount']
+    fields = ['location','collector','type_to_collect', 'amount']
 
     def form_valid(self, form):
         form.instance.author = self.request.user

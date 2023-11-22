@@ -4,7 +4,10 @@ FRMT | Home
 {% endblock title %}
 
 {% block content %}
+
 <main id="main" class="main">
+
+  {% block pageTitle %}
   <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>
@@ -15,12 +18,18 @@ FRMT | Home
     </nav>
   </div>
   <!-- End Page Title -->
+  {% endblock pageTitle %}
 
-  <section class="section dashboard">
+  {% block dashboard %}
+    <section class="section dashboard">
     <div class="row">
+      {% block cards %}
       <!-- Left side columns -->
       <div class="col-lg-12">
         <div class="row">
+          
+          
+
           <!-- Revenue Card -->
           <div class="col-xxl-4 col-md-4">
             <div class="card info-card revenue-card">
@@ -232,8 +241,11 @@ FRMT | Home
         </div>
       </div>
       <!-- End Left side columns -->
+      {% endblock cards %}
     </div>
   </section>
+  {% endblock dashboard %}
+
 </main>
 <!-- End #main -->
 {% endblock content %}
