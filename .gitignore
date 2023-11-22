@@ -1,2 +1,5 @@
 venv/
+FRMT2/_pycache_/
+users/_pycache_/
+users/migrations/_pycache_
 

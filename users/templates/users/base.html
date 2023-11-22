@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Users</title>
+  <title>{% block title %}FRMT{% endblock %}</title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -333,41 +333,41 @@
             <i class="bi bi-person-fill"></i>
             <span>Users</span>
           </a>
-        </li>
+        </li><!-- End Users Page Nav -->
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
             <i class="bi bi-building"></i>
             <span>Businesses</span>
           </a>
-        </li><!-- End Profile Page Nav -->
+        </li><!-- End Businesses Page Nav -->
       
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
             <i class="bi bi-cash"></i>
             <span>Transactions</span>
           </a>
-        </li><!-- End Profile Page Nav -->
+        </li><!-- End Transactions Page Nav -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
             <i class="bi bi-cash"></i>
             <span>Collection Instances</span>
           </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- Collection Instances Page Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
             <i class="bi bi-house"></i>
             <span>Properties</span>
           </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- Properties Page  Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
             <i class="bi bi-clipboard-data"></i>
             <span>Market Collections</span>
           </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- Market Page Nav -->
   
         
 
@@ -385,7 +385,7 @@
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Login</span>
           </a>
-        </li><!-- End Login Page Nav -->
+        </li><!-- End Logout Page Nav -->
         {% endif %}
         
   
@@ -412,30 +412,45 @@
         </li><!-- End Dashboard Nav -->
   
         <li class="nav-heading">Pages</li>
+  
+      
         <li class="nav-item">
-          <a class="nav-link collapsed" href="{% url 'frmt-business-list' %}">
+          <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
             <i class="bi bi-building"></i>
             <span>Businesses</span>
           </a>
-        </li><!-- End Profile Page Nav -->
-        
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="{% url 'frmt-register' %}">
-            <i class="bi bi-person"></i>
-            <span>Collectors</span>
-          </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- End Businesses Page Nav -->
       
         <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-transactions' %}">
+            <i class="bi bi-cash"></i>
+            <span>Transactions</span>
+          </a>
+        </li><!-- End Transactions Page Nav -->
+        <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
-            <i class="bi bi-box-arrow-in-right"></i>
+            <i class="bi bi-cash"></i>
             <span>Collection Instances</span>
           </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- Collection Instances Page Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-properties' %}">
+            <i class="bi bi-house"></i>
+            <span>Properties</span>
+          </a>
+        </li><!-- Properties Page  Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-market' %}">
+            <i class="bi bi-clipboard-data"></i>
+            <span>Market Collections</span>
+          </a>
+        </li><!-- Market Page Nav -->
   
-  
-  
-  
+        
+
+
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
@@ -449,7 +464,7 @@
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Login</span>
           </a>
-        </li><!-- End Login Page Nav -->
+        </li><!-- End Logout Page Nav -->
         {% endif %}
         
   
@@ -486,19 +501,8 @@
             <i class="bi bi-cash"></i>
             <span>My Collection Instances</span>
           </a>
-        </li><!-- Revenue Type Creation Nav -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="{% url 'frmt-my-c-instances' %}">
-            <i class="bi bi-cash"></i>
-            <span>My Collection Instances</span>
-          </a>
-        </li><!-- Revenue Type Creation Nav -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="{% url 'frmt-my-c-instances' %}">
-            <i class="bi bi-cash"></i>
-            <span>My Collection Instances</span>
-          </a>
-        </li><!-- Revenue Type Creation Nav -->
+        </li><!-- My Collection Instances Pages Nav -->
+
   
   
   
@@ -547,6 +551,7 @@
           </a>
         </li><!-- Revenue Type Creation Nav -->
 
+
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-logout' %}">
@@ -573,11 +578,12 @@
   
   
   
-
-  
+  <!--Main Area-->
   {% block content %}
-  
+    
   {% endblock content %}
+  <!--End Main Area--> 
+
 
 
 
@@ -643,7 +649,8 @@
     updateRevenueCard('Today');
   });
 </script>
-
 </body>
 
 </html>
+
+

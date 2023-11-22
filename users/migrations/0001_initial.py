@@ -53,19 +53,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Transaction',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=20)),
-                ('receipt_info', models.CharField(max_length=150)),
-                ('date_time', models.DateTimeField(default=django.utils.timezone.now)),
-                ('status', models.CharField(choices=[('P', 'Pending'), ('C', 'Completed'), ('F', 'Failed')], max_length=150)),
-                ('collectorID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='collector_id', to=settings.AUTH_USER_MODEL)),
-                ('payerID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payer_id', to=settings.AUTH_USER_MODEL)),
-                ('revenueID', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='users.revenue')),
-            ],
-        ),
-        migrations.CreateModel(
             name='Collection_instance',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

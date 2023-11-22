@@ -1,58 +1,40 @@
-{% extends "users/login.html" %}
+{% extends "users/base_glow.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<main>
-    <div class="container">
+<main id="main" class="main">
 
-      <section class="section dashboard">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+<section class="section dashboard">
+  
+<div class="col-md-6 offset-md-3">
+  <form class="row g-3 needs-validation" method="POST">
+    {% csrf_token %}
 
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="{% static 'assets/img/logonew.png' %}" alt="">
-                  <span class="d-none d-lg-block">FRMT</span>
-                </a>
-              </div><!-- End Logo -->
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">New User Form</legend>
+      {{ form|crispy }}
+    </fieldset>
 
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter user's personal details to create account</p>
-                  </div>
-
-                  <form class="row g-3 needs-validation" method = "POST">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">New User Form</legend>
-                        {{form|crispy}}
-                    </fieldset>
-
-                    <div class="col-12">
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Account already exists? <a href="{% url "frmt-login" %}">Log in</a></p>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
+    <div class="col-12">
 
 
-            </div>
-          </div>
-        </div>
+      <button class="btn btn-primary w-100" type="submit">Create Account</button>
 
-      </section>
 
     </div>
-  </main><!-- End #main -->
+
+
+
+    <div class="col-12">
+
+
+      <p class="small mb-0">Account already exists? <a href="{% url "frmt-login" %}">Log in</a></p>
+    </div>
+  </form>
+</div>
+
+</section>
+</main>
+
+
 {% endblock content %}

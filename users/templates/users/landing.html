@@ -1,477 +1,287 @@
-{% extends "users/base.html" %}
-{% block content %}
-<main id="main" class="main">
+{% load static %}
 
-  <div class="pagetitle">
-    <h1>Dashboard</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'frmt-home' %}">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
+<!DOCTYPE html>
+<html lang="en">
 
-  <section class="section dashboard">
-    <div class="row">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-      <!-- Left side columns -->
-      <div class="col-lg-12">
-        <div class="row">
+  <title>Home</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-                      <!-- Revenue Card -->
-                      <div class="col-xxl-4 col-md-4">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title">Total Collections <span>| Today</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cash"></i>
-                              </div>
-                              <div class="ps-3">
-                                <h6>MK156 000</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-          
-                       <!-- Revenue Card -->
-                       <div class="col-xxl-4 col-md-4">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title">Total Collections <span>| This Month</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cash"></i>
-                              </div>
-                              <div class="ps-3">
-                                <h6>MK2 264 400</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-          
-                       <!-- Revenue Card -->
-                       <div class="col-xxl-4 col-md-4">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title">Revenue <span>| This Year</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cash"></i>
-                              </div>
-                              <div class="ps-3">
-                                <h6>MK31 264 800</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
+  <!-- Favicons -->
+  <link href="{% static 'assets4/img/logo.png' %}" rel="icon">
+  <link href="{% static 'assets4/img/logo.png' %}" rel="apple-touch-icon">
 
-          <!-- Sales Card -->
-          <div class="col-xxl-4 col-md-4">
-            <div class="card info-card sales-card">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets4/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets4/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets4/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets4/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets4/vendor/aos/aos.css" rel="styleshee' %}t">
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">Yesterday</a></li>
-                  <li><a class="dropdown-item" href="#">Wednesday</a></li>
-                </ul>
-              </div>
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets4/css/main.css' %}" rel="stylesheet">
 
-              <div class="card-body">
-                <h5 class="card-title">Limbe <span>| Victor Mjimapemba</span></h5>
+  <!-- =======================================================
+  * Template Name: Append
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/append-bootstrap-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
 
-                <!-- Bar Chart -->
-                <div id="barChart" style="min-height: 400px;" class="echart"></div>
-  
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#barChart")).setOption({
-                      xAxis: {
-                        type: 'category',
-                        data: ['P Fee', 'M Fee', 'S Fee']
-                      },
-                      yAxis: {
-                        type: 'value'
-                      },
-                      series: [{
-                        data: [12, 20, 15],
-                        type: 'bar'
-                      }]
-                    });
-                  });
-                </script>
-                <!-- End Bar Chart -->
-              </div>
+<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
 
-            </div>
-          </div><!-- End Sales Card -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
 
-          <!-- Sales Card -->
-          <div class="col-xxl-4 col-md-4">
-            <div class="card info-card sales-card">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <img src="{% static 'assets/img/logo.png' %}" alt="">
+        <h1>FRMT</h1>
+      </a>
 
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
+      <!-- Nav Menu -->
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">Yesterday</a></li>
-                  <li><a class="dropdown-item" href="#">Wednesday</a></li>
-                </ul>
-              </div>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav><!-- End Nav Menu -->
 
-              <div class="card-body">
-                <h5 class="card-title">Ndirande <span>| Cuthbert Magawa</span></h5>
-
-                <!-- Bar Chart -->
-                <div id="barChart2" style="min-height: 400px;" class="echart"></div>
-  
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#barChart2")).setOption({
-                      xAxis: {
-                        type: 'category',
-                        data: ['P Fee', 'M Fee', 'S Fee']
-                      },
-                      yAxis: {
-                        type: 'value'
-                      },
-                      series: [{
-                        data: [12, 20, 15],
-                        type: 'bar'
-                      }]
-                    });
-                  });
-                </script>
-                <!-- End Bar Chart -->
-              </div>
-
-            </div>
-          </div><!-- End Sales Card -->
-
-           <!-- Sales Card -->
-           <div class="col-xxl-4 col-md-4">
-            <div class="card info-card sales-card">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">Yesterday</a></li>
-                  <li><a class="dropdown-item" href="#">Wednesday</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Mibawa <span>| Fahad Twaha</span></h5>
-
-                <!-- Bar Chart -->
-                <div id="barChart3" style="min-height: 400px;" class="echart"></div>
-  
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#barChart3")).setOption({
-                      xAxis: {
-                        type: 'category',
-                        data: ['P Fee', 'M Fee', 'S Fee']
-                      },
-                      yAxis: {
-                        type: 'value'
-                      },
-                      series: [{
-                        data: [12, 20, 15],
-                        type: 'bar'
-                      }]
-                    });
-                  });
-                </script>
-                <!-- End Bar Chart -->
-              </div>
-
-            </div>
-          </div><!-- End Sales Card -->
-
-           <!-- Reports -->
-           <div class="col-12">
-            <div class="card">
-
-              <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Last Week</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">Last Month</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">Top Collections <span>/This Week</span></h5>
-
-                <!-- Line Chart -->
-                <div id="reportsChart1"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#reportsChart1"), {
-                      series: [{
-                        name: 'Limbe',
-                        data: [31, 40, 28, 51, 42, 82, 56],
-                      }, {
-                        name: 'Mibawa',
-                        data: [11, 32, 45, 32, 34, 52, 41]
-                      }, {
-                        name: 'Ndirande',
-                        data: [15, 11, 32, 18, 9, 24, 11]
-                      }],
-                      chart: {
-                        height: 350,
-                        type: 'area',
-                        toolbar: {
-                          show: false
-                        },
-                      },
-                      markers: {
-                        size: 4
-                      },
-                      colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                      fill: {
-                        type: "gradient",
-                        gradient: {
-                          shadeIntensity: 1,
-                          opacityFrom: 0.3,
-                          opacityTo: 0.4,
-                          stops: [0, 90, 100]
-                        }
-                      },
-                      dataLabels: {
-                        enabled: false
-                      },
-                      stroke: {
-                        curve: 'smooth',
-                        width: 2
-                      },
-                      xaxis: {
-                        type: 'date',
-                        categories: ["2018-09-19", "2018-09-19", "2018-09-19", "2018-09-19", "2018-09-19", "2018-09-19", "2018-09-19"]
-                      },
-                      tooltip: {
-                        x: {
-                          format: 'dd/MM/yy'
-                        },
-                      }
-                    }).render();
-                  });
-                </script>
-                <!-- End Line Chart -->
-
-              </div>
-
-            </div>
-          </div><!-- End Reports -->
-
-                      <!-- Revenue Card -->
-                      <div class="col-xxl-4 col-md-3">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title2">Highest Area <span>| Limbe</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="ps-3">
-                                <h6>MK4 156 000</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-
-                      <!-- Revenue Card -->
-                      <div class="col-xxl-4 col-md-3">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title2">Lowest Area <span>| Chichiri</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="ps-3">
-                                <h6>MK156 000</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-          
-                       <!-- Revenue Card -->
-                       <div class="col-xxl-4 col-md-3">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title2">Highest Type <span>| Market Fee</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="ps-3">
-                                <h6>MK2 264 400</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-          
-                       <!-- Revenue Card -->
-                       <div class="col-xxl-4 col-md-3">
-                        <div class="card info-card revenue-card">
-          
-                          <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-          
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
-                          </div>
-          
-                          <div class="card-body">
-                            <h5 class="card-title2">Lowest Type <span>| Parking Fee</span></h5>
-          
-                            <div class="d-flex align-items-center">
-                              <div class="ps-3">
-                                <h6>MK64 800</h6>
-          
-                              </div>
-                            </div>
-                          </div>
-          
-                        </div>
-                      </div><!-- End Revenue Card -->
-
-         
-
-        </div>
-      </div><!-- End Left side columns -->
+      <a></a>
 
     </div>
-  </section>
+  </header><!-- End Header -->
 
-</main><!-- End #main -->
-{% endblock content %}
+  <main id="main">
+
+    <!-- Hero Section - Home Page -->
+    <section id="hero" class="hero">
+
+      <img src="{% static 'assets4/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-10 align-items-center justify-content-center text-center">
+            <h2 data-aos="fade-up" data-aos-delay="100">FRMT SYSTEM</h2>
+            <br/>
+            <p data-aos="fade-up" data-aos-delay="200">FINANCIAL AND REVENUE MANAGEMENT AND TAXATION SYSTEM</p>
+            <br/>
+          </div>
+          <div class="d-grid gap-2 col-4 mx-auto">
+            <a href="{% url 'frmt-login' %}" class="btn btn-lg btn-primary " >Login</a>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Hero Section -->
+
+
+    <!-- About Section - Home Page -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-xl-center gy-5">
+
+          <div class="col-xl-5 content">
+            <h3>FRMT</h3>
+            <h2>Financial and Reveue Management, and Taxation System</h2>
+            <p>The FRMT system combines financial, revenue, taxation, monitoring, and verification
+               modules to create a unified approach for council management. Designed with user-friendly features
+                and sustainable strategies, this integrated system follows international standards and applicable laws. 
+                Its goal is to introduce innovations and advancements that contribute to socio-economic 
+                development in the regions it serves.</p>
+          </div>
+
+          <div class="col-xl-7">
+            <div class="row gy-4 icon-boxes">
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box">
+                  <i class="bi bi-globe2"></i>
+                  <h3>Convenient Payments</h3>
+                  <p>Online payment options for businesses and properties owners, 
+                    Monitor transactions and balances effortlessly</p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box">
+                  <i class="bi bi-calculator"></i>
+                  <h3>Revenue Management</h3>
+                  <p>Automate collections for businesses, properties, and market vendors.
+                    Real-time syncing for accurate financial tracking.</p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box">
+                  <i class="bi bi-clipboard-pulse"></i>
+                  <h3>Financial Oversight</h3>
+                  <p>Web portal for instant monitoring by officials. Detailed reports for transparent 
+                    decision-making.</p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="icon-box">
+                  <i class="bi bi-phone"></i>
+                  <h3>Instant Receipts and Verification</h3>
+                  <p>Mobile app for revenue collections and issuing of receipts. 
+                    USSD receipt verification for customers.</p>
+                </div>
+              </div> <!-- End Icon Box -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+
+
+
+    <!-- Contact Section - Home Page -->
+    <section id="contact" class="contact">
+
+      <!--  Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to us with any inquiries or feedback</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+
+            <div class="row gy-4">
+              <div class="col-md-6">
+                <div class="info-item" data-aos="fade" data-aos-delay="200">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Address</h3>
+                  <p>Mahatima gandhi Road</p>
+                  <p>Mount Pleasant, Blantyre</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="col-md-6">
+                <div class="info-item" data-aos="fade" data-aos-delay="300">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>+265 9952 97578 </p>
+                  <p>+265 8874 77434</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="col-md-6">
+                <div class="info-item" data-aos="fade" data-aos-delay="400">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>ftwaha@rydbergstarck.com</p>
+                  <p>vmjimapemba@rydbergstarck.com</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="col-md-6">
+                <div class="info-item" data-aos="fade" data-aos-delay="500">
+                  <i class="bi bi-clock"></i>
+                  <h3>Open Hours</h3>
+                  <p>Monday - Friday</p>
+                  <p>8:00AM - 05:00PM</p>
+                </div>
+              </div><!-- End Info Item -->
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- End Contact Section -->
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+
+    <div class="container copyright text-center mt-4">
+      <p>&copy; <span>Copyright</span> <strong class="px-1">FRMT</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://rydbergstarck.com/">Rydberg Starck</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <!-- Scroll Top Button -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets4/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets4/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets4/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets4/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets4/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets4/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets4/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets4/js/main.js' %}"></script>
+
+</body>
+
+</html>
