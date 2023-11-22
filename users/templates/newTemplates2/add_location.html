@@ -1,0 +1,61 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block content %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Location</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">Add Location</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    {% if submitted %}
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <div><h5>Location Added Successifully!</h5></div>
+                        <div><a href="{% url "collections" %}"><button  class="btn btn-primary" type="button">
+                            Back</button></a></div>
+                     </div>
+                    {% else %}
+    
+                  <!-- Vertical Form -->
+                  <form class="row g-3" action="" method=POST>
+                    {% csrf_token %}
+
+                    {% comment %} <div class="col-12">
+                      <label for="inputNanme4" class="form-label">Location Name</label>
+                      <input type="text" class="form-control" id="inputNanme4">
+                    </div> {% endcomment %}
+
+                    {{form.as_p}}
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form><!-- Vertical Form -->
+
+                  {% endif %}
+    
+                </div>
+              </div>
+
+        </div>
+
+      
+      </div>
+    </section>
+
+
+  </main><!-- End #main -->
+{% endblock content %}

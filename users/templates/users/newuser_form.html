@@ -1,12 +1,28 @@
-{% extends "users/base_glow.html" %}
+{% extends "users/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<main id="main" class="main">
+  <main id="main" class="main">
 
-<section class="section dashboard">
-  
-<div class="col-md-6 offset-md-3">
+    <div class="pagetitle">
+      <h1>New User</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">Add User</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+
+    
   <!--Form-->
   <form class="row g-3 needs-validation" method="POST">
     {% csrf_token %}
@@ -33,10 +49,16 @@
     </div>
   </form>
   <!--End Form-->
-</div>
 
-</section>
-</main>
+                </div>
+              </div>
+
+        </div>
+
+      
+      </div>
+    </section>
 
 
+  </main><!-- End #main -->
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewUser, Revenue, Transaction,Collection_instance, Business, Property, Location
+from .models import NewUser, Revenue, Transaction,Collection_instance, Business, Property, Location, CollectionType, CollectionInstance
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -46,3 +46,5 @@ admin.site.register(Business)
 admin.site.register(Property)
 admin.site.register(Collection_instance)
 admin.site.register(Location)
+admin.site.register(CollectionType)
+admin.site.register(CollectionInstance)

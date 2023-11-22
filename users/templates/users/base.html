@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+{% block head %}
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -78,6 +78,8 @@
   ></script>
 
 </head>
+{% endblock head %}
+
 
 <body>
 
@@ -326,7 +328,7 @@
           </a>
         </li><!-- End Dashboard Nav -->
   
-        <li class="nav-heading">Pages</li>
+        <li class="nav-heading">Admin</li>
   
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-users' %}">
@@ -334,7 +336,9 @@
             <span>Users</span>
           </a>
         </li><!-- End Users Page Nav -->
-      
+
+
+        <li class="nav-heading">Council Official</li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-businesses' %}">
             <i class="bi bi-building"></i>
@@ -348,6 +352,8 @@
             <span>Transactions</span>
           </a>
         </li><!-- End Transactions Page Nav -->
+
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-c-instances' %}">
             <i class="bi bi-cash"></i>
@@ -368,6 +374,22 @@
             <span>Market Collections</span>
           </a>
         </li><!-- Market Page Nav -->
+
+        <li class="nav-heading">Revenue Creator</li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'frmt-parameters' %}">
+            <i class="bi bi-percent"></i>
+            <span>Revenue Parameters</span>
+          </a>
+        </li><!-- Revenue Type Creation Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url "collections" %}">
+            <i class="bi bi-list-ul"></i>
+            <span>Collections Types</span>
+          </a>
+        </li><!-- Collections Types Page Nav -->
+
   
         
 
@@ -411,7 +433,7 @@
           </a>
         </li><!-- End Dashboard Nav -->
   
-        <li class="nav-heading">Pages</li>
+        <li class="nav-heading">Council Official</li>
   
       
         <li class="nav-item">
@@ -494,7 +516,7 @@
           </a>
         </li><!-- End Dashboard Nav -->
   
-        <li class="nav-heading">Pages</li>
+        <li class="nav-heading">Collector</li>
   
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-my-c-instances' %}">
@@ -543,13 +565,20 @@
           </a>
         </li><!-- End Dashboard Nav -->
   
-        <li class="nav-heading">Pages</li>
+        <li class="nav-heading">Revenue Creator</li>
         <li class="nav-item">
           <a class="nav-link collapsed" href="{% url 'frmt-parameters' %}">
-            <i class="bi bi-box-arrow-in-right"></i>
+            <i class="bi bi-percent"></i>
             <span>Revenue Parameters</span>
           </a>
         </li><!-- Revenue Type Creation Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url "collections" %}">
+            <i class="bi bi-list-ul"></i>
+            <span>Collections Types</span>
+          </a>
+        </li><!-- Collections Types Page Nav -->
 
 
         {% if user.is_authenticated %}

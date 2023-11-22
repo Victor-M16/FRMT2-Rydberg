@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from .models import NewUser
 from .models import Business
-from .models import Property, Transaction, Collection_instance
+from .models import Property, Transaction, Collection_instance,CollectionInstance
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,8 +15,9 @@ class CollectionInstanceSerializer(serializers.ModelSerializer):
     location_id = serializers.PrimaryKeyRelatedField(source='location', read_only=True)
 
     class Meta:
-        model = Collection_instance
+        model = CollectionInstance
         fields = ['location', 'location_id', 'type_to_collect', 'amount']
+
 
 
 class PropertySerializer(serializers.ModelSerializer):

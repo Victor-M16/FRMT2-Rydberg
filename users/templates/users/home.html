@@ -4,7 +4,7 @@ FRMT | Home
 {% endblock title %}
 
 {% block content %}
-
+{% if user.user_type != "Collector" %}
 <main id="main" class="main">
 
   {% block pageTitle %}
@@ -12,7 +12,7 @@ FRMT | Home
     <h1>Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
@@ -248,4 +248,31 @@ FRMT | Home
 
 </main>
 <!-- End #main -->
+{% else %}
+<main id="main" class="main">
+
+  {% block pageTitleCollector %}
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% endblock pageTitleCollector %}
+
+  {% block dashboardCollector %}
+    <section class="section dashboard">
+    <div class="row">
+
+    </div>
+  </section>
+  {% endblock dashboardCollector %}
+
+</main>
+<!-- End #main -->
+{% endif %}
 {% endblock content %}

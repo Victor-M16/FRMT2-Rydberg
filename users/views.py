@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 from django.db import models
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -13,6 +14,9 @@ from .models import (
     Business,
     Property,
     Location,
+    CollectionInstance,
+    CollectionType,
+
     )
 from django.views.generic import (
     ListView, 
@@ -23,6 +27,11 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from .forms import (
+    LocationForm,
+    CollectionTypeForm,
+    CollectionInstanceForm,
+)
 
 #API views##############################################
 from rest_framework.views import APIView
@@ -580,3 +589,101 @@ class PropertyDeleteView(LoginRequiredMixin, DeleteView):
     model = Property 
     success_url = '/properties/'
     template_name = "users/properties/property_confirm_delete.html"
+
+
+
+
+
+    
+#New added pages
+def properties(request):
+    return render(request, 'newTemplates2/properties.html', {})
+
+def users(request):
+    return render(request, 'newTemplates2/users.html', {})
+
+
+def collections(request):
+    collection_type = CollectionType.objects.all()
+    collection_instance = CollectionInstance.objects.all()
+    return render(request, 'newTemplates/collections.html', {
+        'collectionType': collection_type, 'collectionInstance': collection_instance})
+
+def usersProfile(request):
+    return render(request, 'newTemplates2/users-profile.html', {})
+
+def collectorsProfile(request):
+    return render(request, 'newTemplates2/collectors-profile.html', {})
+
+def collectorDashboard(request):
+    return render(request, 'newTemplates2/collector-dash.html', {})
+
+def collectorInstances(request):
+    return render(request, 'newTemplates2/collector-Instances.html', {})
+
+def collectorDashProfile(request):
+    return render(request, 'newTemplates2/collector-dash-profile.html', {})
+
+def addLocation(request):
+    submitted = False
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/location/add?submitted=True')
+    else:
+        form = LocationForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request, 'newTemplates2/add_location.html', {'form':form, 'submitted':submitted})
+
+def addCollectionType(request):
+    submitted = False
+    if request.method == "POST":
+        form = CollectionTypeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/type/add?submitted=True')
+    else:
+        form = CollectionTypeForm
+        if 'submitted' in request.GET:
+            submitted = True
+        
+    form = CollectionTypeForm
+    return render(request, 'newTemplates2/add_collection_type.html', {'form':form, 'submitted':submitted})
+
+# def editCollectionType(request, typeID):
+#     collectionType = CollectionType.objects.get(pk=typeID)
+#     return render(request, 'newTemplates/edit_collection_types.html', {'collectionType':collectionType})
+
+def deleteCollectionType(request, collectionType_id):
+    collectionType = CollectionType.objects.get(pk=collectionType_id)
+    # collectionType = get_object_or_404(CollectionType, id=collectionType_id)
+    collectionType.delete()
+    return redirect('collections')
+
+# class CollectionTypeDeleteView(DeleteView):
+#     model = CollectionType
+#     success_url = '/collections/'
+
+def addCollectionInstance(request):
+    submitted = False
+    if request.method == "POST":
+        form = CollectionInstanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/collections/instance/add?submitted=True')
+    else:
+        form = CollectionInstanceForm
+        if 'submitted' in request.GET:
+            submitted = True
+        
+    form = CollectionInstanceForm
+    return render(request, 'newTemplates2/add_collection_instance.html', {'form':form, 'submitted':submitted})
+
+def deleteCollectionInstance(request, collectionInstance_id):
+    collectionInstance = CollectionInstance.objects.get(pk=collectionInstance_id)
+    # collectionType = get_object_or_404(CollectionType, id=collectionType_id)
+    collectionInstance.delete()
+    return redirect('collections')

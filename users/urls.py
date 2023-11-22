@@ -86,7 +86,16 @@ urlpatterns = [
 
     path('mycollections/', views.collectorDashboard, name='collector-dashboard'),
 
-
+#collection type
+    path('collections/location/add', views.addLocation, name='add-location'),
+    path('collections/type/add', views.addCollectionType, name='add-collection-type'),
+    path('collections/instance/add', views.addCollectionInstance, name='add-collection-instance'),
+    path('collections/', views.collections, name='collections'),
+     
+#  path('collections/type/edit/<int:typeID>/', views.editCollectionType, name='edit-collection-type'),
+    path('delete_type/<int:collectionType_id>/', views.deleteCollectionType, name='frmt-CT-delete'),
+    path('delete_instance/<int:collectionInstance_id>/', views.deleteCollectionInstance, name='instance-delete'),
+    
 
 
     #url patterns for collector related collection instance interactions

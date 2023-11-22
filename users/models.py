@@ -145,32 +145,6 @@ def update_collector(sender, instance, **kwargs):
       
 
 
-
-#transaction models
-class Transaction(models.Model):
-    STATUSES=(('P','Pending'),
-              ('C','Completed'),
-              ('F','Failed') 
-              )
-    
-    transaction_type=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
-    amount = models.DecimalField(max_digits=20, decimal_places=2)
-    date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=150, choices=STATUSES)
-    collection_instance_ID = models.ForeignKey(Collection_instance, on_delete=models.CASCADE)
-    description = models.TextField()
-
-
-
-    class Meta:
-        verbose_name = _("Transaction")
-        verbose_name_plural = _("Transactions")
-
-    def __str__(self):
-        return f"Transaction: {self.id}, Amount: {self.amount}, Description: {self.description}"
-    
-    def get_absolute_url(self):
-        return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})
     
 
 
@@ -198,3 +172,62 @@ class Property(models.Model):
 
     def get_absolute_url(self):
         return reverse("frmt-property-detail", kwargs={"pk": self.pk})
+    
+
+
+
+    
+class CollectionType(models.Model):
+    name = models.CharField('Collection Name', max_length=120)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=60)
+    
+    def __str__(self):
+        return self.name
+    
+    # def get_absolute_url(self):
+    #     return reverse("frmt-CT-detail", kwargs={"pk": self.pk})
+    
+    
+class CollectionInstance(models.Model):
+    
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    collector = models.ForeignKey(NewUser, verbose_name=_("Collector"), on_delete=models.CASCADE)
+    collection_type = models.ForeignKey(CollectionType, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    date_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.location.name +'/'+ self.collector.user_name +'/'+ self.collection_type.name +'/'+ self.amount
+    
+    def get_absolute_url(self):
+        return reverse("frmt-CI-detail", kwargs={"pk": self.pk})
+    
+
+
+#transaction models
+class Transaction(models.Model):
+    STATUSES=(('P','Pending'),
+              ('C','Completed'),
+              ('F','Failed') 
+              )
+    
+    transaction_type=models.ForeignKey(Revenue, on_delete=models.CASCADE, null=True)
+    amount = models.DecimalField(max_digits=20, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=150, choices=STATUSES)
+    collection_instance_ID = models.ForeignKey(CollectionInstance, on_delete=models.CASCADE)
+    description = models.TextField()
+
+
+
+    class Meta:
+        verbose_name = _("Transaction")
+        verbose_name_plural = _("Transactions")
+
+    def __str__(self):
+        return f"Transaction: {self.id}, Amount: {self.amount}, Description: {self.description}"
+    
+    def get_absolute_url(self):
+        return reverse("frmt-transaction-detail", kwargs={"pk": self.pk})
+    
