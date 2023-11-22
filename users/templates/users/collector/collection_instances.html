@@ -3,51 +3,67 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Collection Instances</h1>
+      <h1>My Collection Instances</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
-          <li class="breadcrumb-item active">Collection Instances</li>
+          <li class="breadcrumb-item active">My Collection Instances</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
       <div class="row">
-  
-        
-        <div class="container">
-          <table class="table table-hover">
-          <h3>Collection Instances</h3>
-          <thead>
-            <tr>
-              <th scope="col">CI Name</th>
-              <th scope="col">Jurisdiction</th>
-              <th scope="col">Collector</th>
-              <th scope="col">Revenue Type</th>
-              <th scope="col">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for my_collection_instance in my_collection_instances  %}
-            <a href="{% url 'frmt-mCI-detail' %}">
-              <tr>
-                <td>{{my_collection_instance.name}}</td>
-                <td>{{my_collection_instance.jurisdiction}}</td>
-                <td>{{my_collection_instance.collector}}</td>
-                <td>{{my_collection_instance.collected_revenue}}</td>
-                <td>{{my_collection_instance.amount}}</td>
-              </tr>
-            </a>
-            {% endfor %}
-          </tbody>
-        </table>
-        </div>
-        
+        <div class="col-lg-12">
 
-        
+            
+         <!-- Start Table -->
+         <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>My Collection Instances</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jurisdiction</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Amount</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for my_collection_instances in my_collection_instancess  %}
+                      <tr>
+                        <td>{{my_collection_instances.name}}</td>
+                        <td>{{my_collection_instances.jurisdiction}}</td>
+                        <td>{{my_collection_instances.collector}}</td>
+                        <td>{{my_collection_instances.type_to_collect}}</td>
+                        <td>{{my_collection_instances.amount}}</td>
+                        <td class="align-middle">
+                          <a
+                            href="{% url 'frmt-CI-detail' my_collection_instances.id %}"
+                            class="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="Edit user"
+                          >
+                            View
+                          </a>
+                        </td>
+                      </tr>
+                    
+                    {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Table -->
 
-        </div>
       </div>
     </section>
 

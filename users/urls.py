@@ -71,7 +71,7 @@ urlpatterns = [
 
 
     path('dashboard/', views.dashboard, name = 'frmt-dashboard'),
-    path('dashboard/parameters/', views.parameters, name = 'frmt-parameters'),
+    path('home/parameters/', views.parameters, name = 'frmt-parameters'),
 
 
 
