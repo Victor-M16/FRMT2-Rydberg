@@ -25,30 +25,6 @@ class Command(BaseCommand):
             Location.objects.create(name=loc)
             pass
 
-    def populate_users(self):
-        emails = ['victor@rsl.com', 'fahad@rsl.com', 'grace@rsl.com', 'tionge@rsl.com']
-        users = ['Victor Mjimapemba', 'Fahad Twaha', 'Grace Chiwaya', 'Tionge Ngulube']
-        user_types = ['Admin', 'Collector', 'Council Official', 'Revenue Creator']
-        passwords = ['password1', 'password2', 'password3', 'password4']  # Choose your passwords
-
-        for email, user_name, user_type, password in zip(emails, users, user_types, passwords):
-            is_staff = True if user_type == 'Admin' else False
-
-            # Create a NewUser instance
-            new_user = NewUser.objects.create(email=email, user_name=user_name, user_type=user_type, is_staff=is_staff)
-
-            # Set the password using set_password
-            new_user.set_password(password)
-
-            # Save the user instance to persist changes to the database
-            new_user.save()
-
-    def populate_revenue_types(self):
-        # Your logic to create dummy Revenue instances
-        pass
-
-        
-
 
     def populate_dummy_assignments(self):
         # Your logic to create dummy CollectionInstance instances
@@ -138,3 +114,22 @@ class Command(BaseCommand):
             )
 
         pass
+    
+    
+    def populate_users(self):
+        emails = ['victor@rsl.com', 'fahad@rsl.com', 'grace@rsl.com', 'tionge@rsl.com', 'jayne@rsl.com', 'cuthbert@rsl.com']
+        users = ['Victor Mjimapemba', 'Fahad Twaha', 'Grace Chiwaya', 'Tionge Ngulube','Jayne Banda', 'Cuthbert Magawa']
+        user_types = ['Admin', 'Collector', 'Council Official', 'Revenue Creator', 'Collector', 'Collector', ]
+        passwords = ['rsl#admin', 'rsl#collect', 'rsl#official', 'rsl#create', 'rsl#collect', 'rsl#collect',]  # Choose your passwords
+
+        for email, user_name, user_type, password in zip(emails, users, user_types, passwords):
+            is_staff = True if user_type == 'Admin' else False
+
+            # Create a NewUser instance
+            new_user = NewUser.objects.create(email=email, user_name=user_name, user_type=user_type, is_staff=is_staff)
+
+            # Set the password using set_password
+            new_user.set_password(password)
+
+            # Save the user instance to persist changes to the database
+            new_user.save()
