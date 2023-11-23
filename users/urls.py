@@ -47,6 +47,7 @@ from rest_framework import routers
 from .views import LoginView, BusinessByLocationView
 from .views import PropertiesByLocationView
 from .views import get_user_active_assignment
+from .views import CollectionInstanceListAPIView
 
 urlpatterns = [
     
@@ -59,6 +60,8 @@ urlpatterns = [
     path('api/locations/<location_id>/properties', PropertiesByLocationView.as_view(), name='properties-by-location'),
 
     path('api/transactions', TransactionCreateView.as_view(), name='transactions'),
+
+    path('api/collection-instance/', CollectionInstanceListAPIView.as_view(), name='collection-instance-api'),
 
 
 

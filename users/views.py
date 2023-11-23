@@ -103,6 +103,11 @@ class TransactionCreateView(APIView):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
+        
+
+class CollectionInstanceListAPIView(generics.ListAPIView):
+    queryset = CollectionInstance.objects.all()
+    serializer_class = CollectionInstanceSerializer
 
 
 

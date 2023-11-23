@@ -3,7 +3,10 @@
 FRMT | Home
 {% endblock title %}
 
+
+
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 {% if user.user_type != "Collector" %}
 <main id="main" class="main">
 
@@ -160,77 +163,114 @@ FRMT | Home
 
               <div class="card-body">
                 <h5 class="card-title">
-                  Top Collections <span>/This Week</span>
+                  Top Collections <span></span>
                 </h5>
 
-                <!-- Line Chart -->
-                <div id="reportsChart1"></div>
 
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    new ApexCharts(document.querySelector("#reportsChart1"), {
-                      series: [
-                        {
-                          name: "Limbe",
-                          data: [31, 40, 28, 51, 42, 82, 56],
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Line Chart -->
+    <canvas id="collectionInstancesChart" width="800" height="400"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('/api/collection-instance/')
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.results.map(entry => entry.location.name);
+                    const amounts = data.results.map(entry => parseFloat(entry.amount));
+
+                    const ctx = document.getElementById('collectionInstancesChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Collection Amount',
+                                data: amounts,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                                fill: false,
+                            }]
                         },
-                        {
-                          name: "Mibawa",
-                          data: [11, 32, 45, 32, 34, 52, 41],
-                        },
-                        {
-                          name: "Ndirande",
-                          data: [15, 11, 32, 18, 9, 24, 11],
-                        },
-                      ],
-                      chart: {
-                        height: 350,
-                        type: "area",
-                        toolbar: {
-                          show: false,
-                        },
-                      },
-                      markers: {
-                        size: 4,
-                      },
-                      colors: ["#4154f1", "#2eca6a", "#ff771d"],
-                      fill: {
-                        type: "gradient",
-                        gradient: {
-                          shadeIntensity: 1,
-                          opacityFrom: 0.3,
-                          opacityTo: 0.4,
-                          stops: [0, 90, 100],
-                        },
-                      },
-                      dataLabels: {
-                        enabled: false,
-                      },
-                      stroke: {
-                        curve: "smooth",
-                        width: 2,
-                      },
-                      xaxis: {
-                        type: "date",
-                        categories: [
-                          "2018-09-19",
-                          "2018-09-19",
-                          "2018-09-19",
-                          "2018-09-19",
-                          "2018-09-19",
-                          "2018-09-19",
-                          "2018-09-19",
-                        ],
-                      },
-                      tooltip: {
-                        x: {
-                          format: "dd/MM/yy",
-                        },
-                      },
-                    }).render();
-                  });
-                </script>
-                <!-- End Line Chart -->
+                        options: {
+                            scales: {
+                                x: {
+                                    type: 'category',
+                                    labels: labels,
+                                },
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data', error));
+        });
+    </script>
+    <!-- Bar Chart -->
+<div id="reportsChart2"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch('/api/collection-instance/')
+      .then(response => response.json())
+      .then(data => {
+        // Aggregate data by collection type
+        const aggregatedData = {};
+        data.results.forEach(entry => {
+          const collectionTypeName = entry.collection_type.name;
+          const amount = parseFloat(entry.amount);
+          
+          if (!aggregatedData[collectionTypeName]) {
+            aggregatedData[collectionTypeName] = 0;
+          }
+          
+          aggregatedData[collectionTypeName] += amount;
+        });
+
+        // Prepare data for the chart
+        const seriesData = Object.keys(aggregatedData).map(collectionTypeName => ({
+          name: collectionTypeName,
+          data: [aggregatedData[collectionTypeName]],
+        }));
+
+        new ApexCharts(document.querySelector("#reportsChart2"), {
+          series: seriesData,
+          chart: {
+            height: 350,
+            type: "bar",
+            toolbar: {
+              show: false,
+            },
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+            },
+          },
+          colors: ["#4154f1"],
+          dataLabels: {
+            enabled: true,
+          },
+          xaxis: {
+            categories: Object.keys(aggregatedData),
+          },
+          tooltip: {
+            y: {
+              formatter: function (val) {
+                return "$" + val.toFixed(2);
+              },
+            },
+          },
+        }).render();
+      });
+  });
+</script>
+<!-- End Bar Chart -->
+  
               </div>
             </div>
           </div>
