@@ -29,7 +29,7 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jurisdiction</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Location</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Amount</th>
@@ -40,9 +40,9 @@
                     {% for my_collection_instances in my_collection_instancess  %}
                       <tr>
                         <td>{{my_collection_instances.name}}</td>
-                        <td>{{my_collection_instances.jurisdiction}}</td>
+                        <td>{{my_collection_instances.location}}</td>
                         <td>{{my_collection_instances.collector}}</td>
-                        <td>{{my_collection_instances.type_to_collect}}</td>
+                        <td>{{my_collection_instances.collection_type}}</td>
                         <td>{{my_collection_instances.amount}}</td>
                         <td class="align-middle">
                           <a

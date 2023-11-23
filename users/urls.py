@@ -6,7 +6,7 @@ from .views import (
     my_Collection_instanceListView, 
 
     Collection_instanceDetailView, 
-    Collection_instanceListView, 
+    CollectionInstanceListView, 
     Collection_instanceCreateView,
     Collection_instanceUpdateView,
     Collection_instanceDeleteView,
@@ -103,7 +103,7 @@ urlpatterns = [
 
 
     #url patterns for council official related collection instance interactions
-    path('CI/', Collection_instanceListView.as_view(), name='frmt-c-instances'),
+    path('CI/', CollectionInstanceListView.as_view(), name='frmt-c-instances'),
     path('CI/new/', Collection_instanceCreateView.as_view(), name='frmt-CI-create'),
     path('CI/<int:pk>/', Collection_instanceDetailView.as_view(), name='frmt-CI-detail'),
     path('CI/<int:pk>/update/', Collection_instanceUpdateView.as_view(), name='frmt-CI-update'),

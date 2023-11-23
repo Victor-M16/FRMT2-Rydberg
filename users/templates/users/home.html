@@ -50,7 +50,7 @@ FRMT | Home
 
               <div class="card-body">
                 <h5 class="card-title">
-                  Total Collections <span>| Today</span>
+                  Total Collections <span>| This Year</span>
                 </h5>
 
                 <div class="d-flex align-items-center">
@@ -80,15 +80,14 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">Highest Type</a></li>
+                  <li><a class="dropdown-item" href="#">Lowest Type</a></li>
                 </ul>
               </div>
 
               <div class="card-body">
                 <h5 class="card-title2">
-                  Lowest Type <span>| Parking Fee</span>
+                  Lowest Type <span>| {{lowest_collection_type.name}}</span>
                 </h5>
 
                 <div class="d-flex align-items-center">
@@ -98,7 +97,7 @@ FRMT | Home
                     <i class="bi bi-cash"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>MK64 800</h6>
+                    <h6>MK{{lowest_collection_type.amount}}</h6>
                   </div>
                 </div>
               </div>
@@ -118,14 +117,13 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li><a class="dropdown-item" href="#">Highest Area</a></li>
+                  <li><a class="dropdown-item" href="#">Lowest Area </a></li>
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title2">Highest Area <span>| Limbe</span></h5>
+                <h5 class="card-title2">Highest Area <span>| {{highest_collection_type.location}}</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div
@@ -134,7 +132,7 @@ FRMT | Home
                     <i class="bi bi-cash"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>MK4 156 000</h6>
+                    <h6>MK {{highest_collection_type.amount}}</h6>
                   </div>
                 </div>
               </div>

@@ -106,6 +106,8 @@ class TransactionCreateView(APIView):
 
 
 
+
+
 #actual FRMT functionality views######################
 class Home(LoginRequiredMixin, View):
     template_name = 'users/home.html'
@@ -116,12 +118,12 @@ class Home(LoginRequiredMixin, View):
         today = timezone.now().date()
 
         #day implementation
-        total_amount_today = Collection_instance.objects.filter(date_time__date=today).aggregate(total_amount=Sum('amount'))['total_amount']
+        total_amount_today = CollectionInstance.objects.filter(date_time__date=today).aggregate(total_amount=Sum('amount'))['total_amount']
 
         #month implementation
         start_of_month = today.replace(day=1)
 
-        total_amount_this_month = Collection_instance.objects.filter(
+        total_amount_this_month = CollectionInstance.objects.filter(
             date_time__date__gte=start_of_month,
             date_time__date__lte=today
         ).aggregate(total_amount=Sum('amount'))['total_amount']
@@ -129,35 +131,36 @@ class Home(LoginRequiredMixin, View):
         #year implementations
         start_of_year = today.replace(month=1, day=1)
 
-        total_amount_this_year = Collection_instance.objects.filter(
+        total_amount_this_year = CollectionInstance.objects.filter(
             date_time__gte=start_of_year,
             date_time__lte=today
         ).aggregate(total_amount=Sum('amount'))['total_amount']
 
 
         # all-time implementations
-        total_amount = Collection_instance.objects.all().aggregate(total_amount=Sum('amount'))['total_amount']
+        total_amount = CollectionInstance.objects.all().aggregate(total_amount=Sum('amount'))['total_amount']
 
         # Get unique collection types and their counts
         collection_types_counts = (
-            Collection_instance.objects.values('type_to_collect').annotate(count=models.Count('type_to_collect'))
+            CollectionInstance.objects.values('collection_type').annotate(count=models.Count('collection_type'))
         )
 
-        collection_types = [item['type_to_collect'] for item in collection_types_counts]
+        collection_types = [item['collection_type'] for item in collection_types_counts]
         collection_types_values = [item['count'] for item in collection_types_counts]
-        collection_types_counts_dict = {item['type_to_collect']: item['count'] for item in collection_types_counts}
+        collection_types_counts_dict = {item['collection_type']: item['count'] for item in collection_types_counts}
 
         revenueTypes = []
         amounts = []
 
-        queryset = Collection_instance.objects.all()
+        queryset = CollectionInstance.objects.all()
 
         for instance in queryset:
-            revenueTypes.append(str(instance.type_to_collect))
+            revenueTypes.append(str(instance.collection_type))
             temp = str(instance.amount)
             amounts.append(temp)
 
-
+        highest_collection_type = CollectionType.objects.all().order_by('-amount').first()
+        lowest_collection_type = CollectionType.objects.all().order_by('amount').first()
 
         return {'revenueTypes':revenueTypes,
                 'amounts':amounts,
@@ -168,9 +171,11 @@ class Home(LoginRequiredMixin, View):
                 'total_amount_this_month': total_amount_this_month,
                 'total_amount_today': total_amount_today,
                 'users' : NewUser.objects.all(),
-                'collection_instances':Collection_instance.objects.all(),
+                'collection_instances':CollectionInstance.objects.all(),
                 'transactions':Transaction.objects.all(),
                 'revenue_types':Revenue.objects.all(),
+                'highest_collection_type' : highest_collection_type,
+                'lowest_collection_type' : lowest_collection_type
                 }
 
     def get(self, request, *args, **kwargs):
@@ -182,7 +187,7 @@ class Home(LoginRequiredMixin, View):
 def landing(request):
     context = {
         'users':NewUser.objects.all(),
-        'collection_instances':Collection_instance.objects.all(),
+        'collection_instances':CollectionInstance.objects.all(),
         'transactions':Transaction.objects.all(),
         'revenue_types':Revenue.objects.all(),
     }
@@ -197,8 +202,8 @@ def displayCollectionInstances(request):
     
     
     context = {
-        'collection_instances': Collection_instance.objects.all(),
-        'my_collection_instances' : Collection_instance.objects.filter(collector=current_user)
+        'collection_instances': CollectionInstance.objects.all(),
+        'my_collection_instances' : CollectionInstance.objects.filter(collector=current_user)
     }
 
     if current_user.user_type == "Council Official":
@@ -253,7 +258,7 @@ def dashboard(request):
     """   
     context = {
         'users':NewUser.objects.all(),
-        'collection_instances':Collection_instance.objects.all(),
+        'collection_instances':CollectionInstance.objects.all(),
         'transactions':Transaction.objects.all(),
         'revenue_types':Revenue.objects.all(),
     }
@@ -314,8 +319,6 @@ def users(request):
 def market(request):
     return render(request, 'users/councilOfficial/market.html', {})
 
-def collections(request):
-    return render(request, 'newTemplates/collections.html', {})
 
 def usersProfile(request):
     return render(request, 'newTemplates/users-profile.html', {})
@@ -336,19 +339,19 @@ def collectorDashProfile(request):
 
 
 #####################################################################################################
-class Collection_instanceListView(LoginRequiredMixin, ListView):
-    model = Collection_instance
+class CollectionInstanceListView(LoginRequiredMixin, ListView):
+    model = CollectionInstance
     template_name = "users/councilOfficial/collection_instances.html"
     context_object_name = "collection_instances"
 
 
 class Collection_instanceDetailView(LoginRequiredMixin, DetailView):
-    model = Collection_instance
+    model = CollectionInstance
 
 
 class Collection_instanceCreateView(LoginRequiredMixin, CreateView):
-    model = Collection_instance 
-    fields = ['location','collector','type_to_collect', 'amount']
+    model = CollectionInstance 
+    fields = ['location','collector','collection_type', 'amount']
 
     #def form_valid(self, form):
      #   form.instance.author = self.request.user
@@ -356,22 +359,25 @@ class Collection_instanceCreateView(LoginRequiredMixin, CreateView):
 
 
 class Collection_instanceUpdateView(LoginRequiredMixin, UpdateView):
-    model = Collection_instance 
-    fields = ['location','collector','type_to_collect', 'amount']
+    model = CollectionInstance 
+    fields = ['location','collector','collection_type', 'amount']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)   
 
 class Collection_instanceDeleteView(LoginRequiredMixin, DeleteView):
-    model = Collection_instance 
+    model = CollectionInstance 
     success_url = '/CI/'
     
 
 class my_Collection_instanceListView(LoginRequiredMixin, ListView):
-    model = Collection_instance
+    model = CollectionInstance
     template_name = "users/collector/collection_instances.html"
     context_object_name = "my_collection_instances"
+
+
+
 
     def get_queryset(self):
         
@@ -379,7 +385,7 @@ class my_Collection_instanceListView(LoginRequiredMixin, ListView):
         current_user = self.request.user
 
         # Filter the Collection_instance queryset based on the current user
-        queryset = Collection_instance.objects.filter(collector=current_user)
+        queryset = CollectionInstance.objects.filter(collector=current_user)
 
         return queryset
 

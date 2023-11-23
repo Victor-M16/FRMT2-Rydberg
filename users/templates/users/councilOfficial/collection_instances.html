@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
 
-                  {% for instance in collectionInstance %}
+                  {% for instance in collection_instances %}
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
@@ -75,13 +75,10 @@
         </div>
       </div><!-- End Table -->
 
-        
-        <div class="row">
-          <div class="col-lg-4">
-            <a href="{% url "add-collection-instance" %}"><button  class="btn btn-primary" type="button">
-              Create New Instance</button></a>
-          </div>
-        </div> 
+      <div class="col-lg-4">
+        <a href="{% url "add-collection-instance" %}"><button  class="btn btn-primary" type="button">
+          Create New Instance</button></a>
+      </div>
       </div>
     </section>
 
