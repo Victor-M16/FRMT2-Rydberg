@@ -269,10 +269,10 @@ def dashboard(request):
 def parameters(request):
     current_user = request.user  # Get the currently logged-in user
         
-    if current_user.user_type == "Revenue Creator":
-        return render(request, 'users/revenueCreator/parameters.html')
-    else:
-       return render(request, 'users/councilOfficial/parameters.html')
+    # if current_user.user_type == "Council Official":
+    #     return render(request, 'users/councilOfficial/parameters.html')
+    # else:
+    return render(request, 'users/revenueCreator/parameters.html')
 
 
 @login_required
