@@ -46,13 +46,10 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import LoginView, BusinessByLocationView
 from .views import PropertiesByLocationView
-<<<<<<< HEAD
 from .views import get_user_active_assignment,get_locations
 from .views import BusinessCreateView,BusinessApiCreateView
-=======
 from .views import get_user_active_assignment
 from .views import CollectionInstanceListAPIView
->>>>>>> e37db665bc84dcbf47ab4fb718f3fde03b818423
 
 urlpatterns = [
     
