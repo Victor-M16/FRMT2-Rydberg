@@ -1,38 +1,30 @@
-{% extends "users/base_glow.html" %} {% load humanize %}
-{% block title %}
-FRMT | Home
-{% endblock title %}
-
-
-
-{% block content %}
+{% extends 'users/base_glow.html' %} {% load humanize %} {% block title %} FRMT
+| Home {% endblock %} {% block content %}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-{% if user.user_type != "Collector" %}
-<main id="main" class="main">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+{% if user.user_type != 'Collector' %}
+<main id="main" class="main">
   {% block pageTitle %}
   <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'frmt-home' %}">Home</a>
+        </li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
   </div>
   <!-- End Page Title -->
-  {% endblock pageTitle %}
-
-  {% block dashboard %}
-    <section class="section dashboard">
+  {% endblock %} {% block dashboard %}
+  <section class="section dashboard">
     <div class="row">
       {% block cards %}
       <!-- Left side columns -->
       <div class="col-lg-12">
         <div class="row">
-          
-          
-
           <!-- Revenue Card -->
           <div class="col-xxl-4 col-md-4">
             <div class="card info-card revenue-card">
@@ -45,9 +37,15 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Today</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">This Month</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">This Year</a>
+                  </li>
                 </ul>
               </div>
 
@@ -63,7 +61,7 @@ FRMT | Home
                     <i class="bi bi-cash"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>MK{{ total_amount|floatformat:"2"|intcomma }}</h6>
+                    <h6>MK{{ total_amount|floatformat:'2'|intcomma }}</h6>
                   </div>
                 </div>
               </div>
@@ -83,14 +81,18 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Highest Type</a></li>
-                  <li><a class="dropdown-item" href="#">Lowest Type</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Highest Type</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Lowest Type</a>
+                  </li>
                 </ul>
               </div>
 
               <div class="card-body">
                 <h5 class="card-title2">
-                  Lowest Type <span>| {{lowest_collection_type.name}}</span>
+                  Lowest Type <span>| {{ lowest_collection_type.name }}</span>
                 </h5>
 
                 <div class="d-flex align-items-center">
@@ -100,7 +102,7 @@ FRMT | Home
                     <i class="bi bi-cash"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>MK{{lowest_collection_type.amount}}</h6>
+                    <h6>MK{{ lowest_collection_type.amount }}</h6>
                   </div>
                 </div>
               </div>
@@ -120,13 +122,20 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Highest Area</a></li>
-                  <li><a class="dropdown-item" href="#">Lowest Area </a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Highest Area</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Lowest Area</a>
+                  </li>
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title2">Highest Area <span>| {{highest_collection_type.location}}</span></h5>
+                <h5 class="card-title2">
+                  Highest Area
+                  <span>| {{ highest_collection_type.location }}</span>
+                </h5>
 
                 <div class="d-flex align-items-center">
                   <div
@@ -135,7 +144,7 @@ FRMT | Home
                     <i class="bi bi-cash"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>MK {{highest_collection_type.amount}}</h6>
+                    <h6>MK {{ highest_collection_type.amount }}</h6>
                   </div>
                 </div>
               </div>
@@ -155,162 +164,107 @@ FRMT | Home
                     <h6>Filter</h6>
                   </li>
 
-                  <li><a class="dropdown-item" href="#">Last Week</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">Last Month</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Last Week</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">This Month</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Last Month</a>
+                  </li>
                 </ul>
               </div>
 
               <div class="card-body">
-                <h5 class="card-title">
-                  Top Collections <span></span>
-                </h5>
+                <h5 class="card-title">Top Collections <span></span></h5>
 
+                <!-- Line Chart -->
+                <div id="collectionInstancesChart"></div>
 
+                <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    fetch("/api/collection-instance/")
+                      .then((response) => response.json())
+                      .then((data) => {
+                        const dates = data.results.map((entry) =>
+                          new Date(entry.date_time).toLocaleDateString()
+                        );
+                        const amounts = data.results.map((entry) =>
+                          parseFloat(entry.amount)
+                        );
 
+                        const chartOptions = {
+                          chart: {
+                            height: 400,
+                            type: "line",
+                          },
+                          series: [
+                            {
+                              name: "Collection Amount",
+                              data: amounts,
+                            },
+                          ],
+                          xaxis: {
+                            categories: dates,
+                          },
+                          yaxis: {
+                            title: {
+                              text: "Amount",
+                            },
+                          },
+                          colors: ["#008080"], // Teal color
+                          stroke: {
+                            width: 2,
+                          },
+                        };
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Line Chart -->
-    <canvas id="collectionInstancesChart" width="800" height="400"></canvas>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            fetch('/api/collection-instance/')
-                .then(response => response.json())
-                .then(data => {
-                    const labels = data.results.map(entry => entry.location.name);
-                    const amounts = data.results.map(entry => parseFloat(entry.amount));
-
-                    const ctx = document.getElementById('collectionInstancesChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Collection Amount',
-                                data: amounts,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1,
-                                fill: false,
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                x: {
-                                    type: 'category',
-                                    labels: labels,
-                                },
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => console.error('Error fetching data', error));
-        });
-    </script>
-    <!-- Bar Chart -->
-<div id="reportsChart2"></div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch('/api/collection-instance/')
-      .then(response => response.json())
-      .then(data => {
-        // Aggregate data by collection type
-        const aggregatedData = {};
-        data.results.forEach(entry => {
-          const collectionTypeName = entry.collection_type.name;
-          const amount = parseFloat(entry.amount);
-          
-          if (!aggregatedData[collectionTypeName]) {
-            aggregatedData[collectionTypeName] = 0;
-          }
-          
-          aggregatedData[collectionTypeName] += amount;
-        });
-
-        // Prepare data for the chart
-        const seriesData = Object.keys(aggregatedData).map(collectionTypeName => ({
-          name: collectionTypeName,
-          data: [aggregatedData[collectionTypeName]],
-        }));
-
-        new ApexCharts(document.querySelector("#reportsChart2"), {
-          series: seriesData,
-          chart: {
-            height: 350,
-            type: "bar",
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          colors: ["#4154f1"],
-          dataLabels: {
-            enabled: true,
-          },
-          xaxis: {
-            categories: Object.keys(aggregatedData),
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return "$" + val.toFixed(2);
-              },
-            },
-          },
-        }).render();
-      });
-  });
-</script>
-<!-- End Bar Chart -->
-  
+                        const chart = new ApexCharts(
+                          document.querySelector("#collectionInstancesChart"),
+                          chartOptions
+                        );
+                        chart.render();
+                      })
+                      .catch((error) =>
+                        console.error("Error fetching data", error)
+                      );
+                  });
+                </script>
+                <!-- End Line Chart -->
               </div>
             </div>
           </div>
           <!-- End Reports -->
-
         </div>
       </div>
       <!-- End Left side columns -->
-      {% endblock cards %}
+      {% endblock %}
     </div>
   </section>
-  {% endblock dashboard %}
-
+  {% endblock %}
 </main>
 <!-- End #main -->
 {% else %}
 <main id="main" class="main">
-
   {% block pageTitleCollector %}
   <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url "frmt-home" %}">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'frmt-home' %}">Home</a>
+        </li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
   </div>
   <!-- End Page Title -->
-  {% endblock pageTitleCollector %}
-
-  {% block dashboardCollector %}
-    <section class="section dashboard">
-    <div class="row">
-
-    </div>
+  {% endblock %} {% block dashboardCollector %}
+  <section class="section dashboard">
+    <div class="row"></div>
   </section>
-  {% endblock dashboardCollector %}
-
+  {% endblock %}
 </main>
 <!-- End #main -->
-{% endif %}
-{% endblock content %}
+{% endif %} {% endblock %}

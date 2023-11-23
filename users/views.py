@@ -349,6 +349,12 @@ class CollectionInstanceListView(LoginRequiredMixin, ListView):
     template_name = "users/councilOfficial/collection_instances.html"
     context_object_name = "collection_instances"
 
+    def get_queryset(self):
+        
+        queryset = CollectionInstance.objects.all().order_by('-date_time')
+
+        return queryset
+
 
 class Collection_instanceDetailView(LoginRequiredMixin, DetailView):
     model = CollectionInstance
@@ -390,7 +396,7 @@ class my_Collection_instanceListView(LoginRequiredMixin, ListView):
         current_user = self.request.user
 
         # Filter the Collection_instance queryset based on the current user
-        queryset = CollectionInstance.objects.filter(collector=current_user)
+        queryset = CollectionInstance.objects.filter(collector=current_user).order_by('-date_time')
 
         return queryset
 
@@ -697,4 +703,4 @@ def deleteCollectionInstance(request, collectionInstance_id):
     collectionInstance = CollectionInstance.objects.get(pk=collectionInstance_id)
     # collectionType = get_object_or_404(CollectionType, id=collectionType_id)
     collectionInstance.delete()
-    return redirect('collections')
+    return redirect('frmt-c-instances')
