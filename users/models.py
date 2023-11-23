@@ -108,6 +108,7 @@ class Revenue(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=150)
     owner = models.CharField(max_length=150)
+    owner_id = models.CharField(max_length=150,null=True)
     description = models.CharField(max_length=500)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, default= 1 )
     

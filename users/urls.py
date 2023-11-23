@@ -46,7 +46,8 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import LoginView, BusinessByLocationView
 from .views import PropertiesByLocationView
-from .views import get_user_active_assignment
+from .views import get_user_active_assignment,get_locations
+from .views import BusinessCreateView,BusinessApiCreateView
 
 urlpatterns = [
     
@@ -59,6 +60,8 @@ urlpatterns = [
     path('api/locations/<location_id>/properties', PropertiesByLocationView.as_view(), name='properties-by-location'),
 
     path('api/transactions', TransactionCreateView.as_view(), name='transactions'),
+    path('api/businesses', BusinessApiCreateView.as_view(), name='businesses'),
+    path('api/locations', get_locations, name='businesses'),
 
 
 

@@ -39,7 +39,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
-from .serializers import UserSerializer
+from .serializers import UserSerializer,LocationSerializer
 from django.contrib.auth import authenticate
 from rest_framework.generics import ListAPIView
 from .serializers import BusinessSerializer, PropertySerializer, TransactionSerializer, CollectionInstanceSerializer
@@ -74,6 +74,15 @@ class BusinessByLocationView(ListAPIView):
         location_id = self.kwargs['location_id']
         return Business.objects.filter(location_id=location_id)
 
+@api_view(['GET'])
+def get_locations(request):
+    try:
+        locations = Location.objects.all()
+        serializer = LocationSerializer(locations,many=True)
+        return Response(serializer.data)
+    except:
+        return Response({'error': 'No locations'}, status=404)
+    
 
 @api_view(['GET'])
 def get_user_active_assignment(request, user_id):
@@ -104,7 +113,16 @@ class TransactionCreateView(APIView):
         else:
             return Response(serializer.errors, status=400)
 
+class BusinessApiCreateView(APIView):
 
+    def post(self, request):
+        serializer = BusinessSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
+        
 
 #actual FRMT functionality views######################
 class Home(LoginRequiredMixin, View):

@@ -42,7 +42,7 @@ class PropertySerializer(serializers.ModelSerializer):
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Business
-        fields = ['id', 'name']
+        fields = "__all__"
 
 
 class TransactionSerializer(serializers.ModelSerializer):
