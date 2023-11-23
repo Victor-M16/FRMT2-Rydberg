@@ -29,24 +29,24 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jurisdiction</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Location</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
+                      
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Amount</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for my_collection_instances in my_collection_instancess  %}
+                    {% for my_collection_instance in my_collection_instances  %}
                       <tr>
-                        <td>{{my_collection_instances.name}}</td>
-                        <td>{{my_collection_instances.jurisdiction}}</td>
-                        <td>{{my_collection_instances.collector}}</td>
-                        <td>{{my_collection_instances.type_to_collect}}</td>
-                        <td>{{my_collection_instances.amount}}</td>
+                        <td>{{my_collection_instance}}</td>
+                        <td>{{my_collection_instance.location}}</td>
+                        <td>{{my_collection_instance.collector}}</td>
+                    
+                        <td>{{my_collection_instance.amount}}</td>
                         <td class="align-middle">
                           <a
-                            href="{% url 'frmt-CI-detail' my_collection_instances.id %}"
+                            href="{% url 'frmt-CI-detail' my_collection_instance.id %}"
                             class="text-secondary font-weight-bold text-xs"
                             data-toggle="tooltip"
                             data-original-title="Edit user"

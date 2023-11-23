@@ -6,7 +6,7 @@ from .views import (
     my_Collection_instanceListView, 
 
     Collection_instanceDetailView, 
-    Collection_instanceListView, 
+    CollectionInstanceListView, 
     Collection_instanceCreateView,
     Collection_instanceUpdateView,
     Collection_instanceDeleteView,
@@ -46,8 +46,13 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import LoginView, BusinessByLocationView
 from .views import PropertiesByLocationView
+<<<<<<< HEAD
 from .views import get_user_active_assignment,get_locations
 from .views import BusinessCreateView,BusinessApiCreateView
+=======
+from .views import get_user_active_assignment
+from .views import CollectionInstanceListAPIView
+>>>>>>> e37db665bc84dcbf47ab4fb718f3fde03b818423
 
 urlpatterns = [
     
@@ -62,6 +67,8 @@ urlpatterns = [
     path('api/transactions', TransactionCreateView.as_view(), name='transactions'),
     path('api/businesses', BusinessApiCreateView.as_view(), name='businesses'),
     path('api/locations', get_locations, name='businesses'),
+
+    path('api/collection-instance/', CollectionInstanceListAPIView.as_view(), name='collection-instance-api'),
 
 
 
@@ -106,7 +113,7 @@ urlpatterns = [
 
 
     #url patterns for council official related collection instance interactions
-    path('CI/', Collection_instanceListView.as_view(), name='frmt-c-instances'),
+    path('CI/', CollectionInstanceListView.as_view(), name='frmt-c-instances'),
     path('CI/new/', Collection_instanceCreateView.as_view(), name='frmt-CI-create'),
     path('CI/<int:pk>/', Collection_instanceDetailView.as_view(), name='frmt-CI-detail'),
     path('CI/<int:pk>/update/', Collection_instanceUpdateView.as_view(), name='frmt-CI-update'),

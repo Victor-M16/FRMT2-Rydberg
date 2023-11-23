@@ -1,55 +1,146 @@
-{% extends "users/dashboards/base.html" %}
-{% load static %}
-{% block content %}
-<h2>Financial Parameters</h2>
+{% extends "users/home.html" %} {% load static %} {% block title %} FRMT |
+Parameters {% endblock title %} {% block pageTitle %}
+<div class="pagetitle">
+  <h1>Parameters</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Parameters</li>
+    </ol>
+  </nav>
 </div>
+<!-- End Page Title -->
+{% endblock pageTitle %} {% block cards %}
 
-<div class="col-xl-7">
-<div class="row gy-4 icon-boxes">
+<!-- City Rate Card -->
+<div class="col-xxl-4 col-md-4">
+  <div class="card info-card revenue-card">
+    <div class="filter">
+      <a class="icon" href="#" data-bs-toggle="dropdown"
+        ><i class="bi bi-three-dots"></i
+      ></a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+        <li class="dropdown-header text-start">
+          <h6>Filter</h6>
+        </li>
 
-  <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-    <div class="icon-box">
-      <i class="bi bi-buildings"></i>
-      <h3>City Rates</h3>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Residential Rate: 0.0009</li>
-        <li class="list-group-item">Commercial Rate: 0.0015</li>
+        <li><a class="dropdown-item" href="#">Residential</a></li>
+        <li><a class="dropdown-item" href="#">Commercial</a></li>
       </ul>
-      <button class="btn btn-danger" >Edit</button>
     </div>
-  </div> <!-- End Icon Box -->
 
-  <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-    <div class="icon-box">
-      <i class="bi bi-person"></i>
-      <h3>License Fees</h3>
-      <p>View and edit a list of the different license fees of different businesses.</p>
+    <div class="card-body">
+      <h5 class="card-title">City Rates<span>| Residential</span></h5>
+
+      <div class="d-flex align-items-center">
+        <div
+          class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+        >
+          <i class="bi bi-house"></i>
+        </div>
+        <div class="ps-3">
+          <h6>0.0009</h6>
+        </div>
+      </div>
     </div>
-  </div> <!-- End Icon Box -->
+  </div>
+</div>
+<!-- End City Rate Card -->
 
-  
 
-  <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
-    <div class="icon-box">
-      <i class="bi bi-cart"></i>
-      <h3>Market fees</h3>
-      <p>View and edit a list of registered businesses.</p>
+
+          <!-- City Rate Card -->
+          <div class="col-xxl-4 col-md-4">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  License Fees<span>| Restaurant</span>
+                </h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bi bi-buildings"></i>
+                  </div>
+                  <div class="ps-3">
+                    <a href="#"><h6>View List</h6></a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End City Rate Card -->
+
+          <!-- City Rate Card -->
+          <div class="col-xxl-4 col-md-4">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  Market Fees<span>| Restaurant</span>
+                </h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bi bi-cart"></i>
+                  </div>
+                  <div class="ps-3">
+                    <a href="#"><h6>View List</h6></a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End City Rate Card -->
+
+          <!-- City Rate Card -->
+          <div class="col-xxl-4 col-md-4">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  Parking Fees<span>| Location</span>
+                </h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bi bi-car-front"></i>
+                  </div>
+                  <div class="ps-3">
+                    <a href="#"><h6>View List</h6></a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End City Rate Card -->
+
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+      <div class="icon-box">
+        <i class="bi bi-cart"></i>
+        <h3>Market fees</h3>
+        <p>View and edit a list of registered businesses.</p>
+      </div>
     </div>
-  </div> <!-- End Icon Box -->
+    <!-- End Icon Box -->
 
-  <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
-    <div class="icon-box">
-      <i class="bi bi-car-front"></i>
-      <h3>Parking Fees</h3>
-      <p>View and reply to customer queries and messages.</p>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+      <div class="icon-box">
+        <i class="bi bi-car-front"></i>
+        <h3>Parking Fees</h3>
+        <p>View and reply to customer queries and messages.</p>
+      </div>
     </div>
-  </div> <!-- End Icon Box -->
-
+    <!-- End Icon Box -->
+    {% endblock cards %}
+  </div>
 </div>
-</div>
-
-</div>
-</div>
-
-</section><!-- End About Section -->
-{% endblock content %}

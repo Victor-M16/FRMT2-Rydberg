@@ -77,6 +77,8 @@
     src="https://api.nepcha.com/js/nepcha-analytics.js"
   ></script>
 
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 {% endblock head %}
 
@@ -646,38 +648,6 @@
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 
-
-<script>
-  $(document).ready(function () {
-    // Function to update the revenue card content
-    function updateRevenueCard(filter) {
-      // Make an AJAX request to your server to get the total amount based on the selected filter
-      $.ajax({
-        url: '/path/to/your/endpoint', // Replace with the actual URL of your server endpoint
-        method: 'GET',
-        data: { filter: filter },
-        success: function (data) {
-          // Update the card content with the received data
-          $('.revenue-card h5.card-title span').text('| ' + filter);
-          $('.revenue-card h6').text('MK' + data.total_amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        },
-        error: function () {
-          console.error('Error fetching data');
-        },
-      });
-    }
-
-    // Event listener for dropdown item clicks
-    $('.dropdown-item').click(function (event) {
-      event.preventDefault();
-      var selectedFilter = $(this).text().trim();
-      updateRevenueCard(selectedFilter);
-    });
-
-    // Initial load (default to Today)
-    updateRevenueCard('Today');
-  });
-</script>
 </body>
 
 </html>

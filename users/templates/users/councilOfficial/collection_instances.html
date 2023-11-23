@@ -24,6 +24,10 @@
             <h6>Collections Instances</h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
+            <div class="col-lg-4">
+              <a href="{% url "add-collection-instance" %}"><button  class="btn btn-primary" type="button">
+                Create New Instance</button></a>
+            </div>
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
@@ -31,14 +35,13 @@
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CI Name</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Location</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Collector</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Revenue Type</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
                     <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  {% for instance in collectionInstance %}
+                  {% for instance in collection_instances %}
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
@@ -53,9 +56,7 @@
                     <td>
                       <p class="text-xs font-weight-bold mb-0">{{instance.collector}}</p>
                     </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">{{instance.collection_type}}</p>
-                    </td>
+
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">MK {{instance.amount}}</span>
                     </td>
@@ -75,13 +76,7 @@
         </div>
       </div><!-- End Table -->
 
-        
-        <div class="row">
-          <div class="col-lg-4">
-            <a href="{% url "add-collection-instance" %}"><button  class="btn btn-primary" type="button">
-              Create New Instance</button></a>
-          </div>
-        </div> 
+
       </div>
     </section>
 
