@@ -92,7 +92,7 @@ class Command(BaseCommand):
                 land_use = 'Commercial'
 
             capital_value = random.uniform(100000, 1000000)  # Generate a random capital value between 100,000 and 1,000,000
-            name = random.choice(properties)  # Generating a random name
+          # Generating a random name
             location = random.choice(locations)
 
             # Calculate rates_owed based on land_use

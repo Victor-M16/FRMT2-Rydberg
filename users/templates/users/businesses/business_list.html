@@ -30,6 +30,7 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Owner</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">National ID</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -38,6 +39,7 @@
                       <tr>
                         <td>{{business.name}}</td>
                         <td>{{business.owner}}</td>
+                        <td>{{business.owner_id}}</td>
                         <td class="align-middle">
                           <a
                             href="{% url 'frmt-business-detail' business.id %}"
